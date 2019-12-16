@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">LearnEasy</string>
+    <string name="title_activity_base_host">BaseHostActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    
+    <string name="menu_remember">Remember</string>
+    <string name="menu_fast_read">Fast read</string>
+    <string name="menu_running_string">Running string</string>
+    <string name="menu_check_memory">Check memory</string>
+    <string name="menu_word_top">Word running top</string>
+    <string name="menu_cards">Cards</string>
+    <string name="menu_diary">Diary</string>
+    <string name="menu_canvas">Canvas</string>
+    <string name="menu_video_notes">Video notes</string>
+
 </resources>

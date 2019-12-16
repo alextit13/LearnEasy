@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_remember">
+
+    <fragment
+        android:id="@+id/nav_remember"
+        android:name="com.learn.easy.ui.remember.RememberFragment"
+        android:label="@string/menu_remember"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_fast_read"
+        android:name="com.learn.easy.ui.fast_read.FastReadFragment"
+        android:label="@string/menu_fast_read"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_running_string"
+        android:name="com.learn.easy.ui.running_string.RunningStringFragment"
+        android:label="@string/menu_running_string"
+        tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_check_memory"
+        android:name="com.learn.easy.ui.check_memory.CheckMemoryFragment"
+        android:label="@string/menu_check_memory"
+        tools:layout="@layout/fragment_tools" />
+
+    <fragment
+        android:id="@+id/nav_word_top"
+        android:name="com.learn.easy.ui.word_running_top.WordRunningTopFragment"
+        android:label="@string/menu_word_top"
+        tools:layout="@layout/fragment_share" />
+
+    <fragment
+        android:id="@+id/nav_cards"
+        android:name="com.learn.easy.ui.cards.CardsFragment"
+        android:label="@string/menu_cards"
+        tools:layout="@layout/fragment_send" />
+</navigation>

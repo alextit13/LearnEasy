@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_remember"
+            android:icon="@drawable/icon_remember"
+            android:title="@string/menu_remember" />
+        <item
+            android:id="@+id/nav_fast_read"
+            android:icon="@drawable/icon_fast_reader"
+            android:title="@string/menu_fast_read" />
+        <item
+            android:id="@+id/nav_running_string"
+            android:icon="@drawable/icon_running_string"
+            android:title="@string/menu_running_string" />
+        <item
+            android:id="@+id/nav_check_memory"
+            android:icon="@drawable/icon_check_memory"
+            android:title="@string/menu_check_memory" />
+        <item
+            android:id="@+id/nav_word_top"
+            android:icon="@drawable/icon_word_top"
+            android:title="@string/menu_word_top" />
+        <item
+            android:id="@+id/nav_cards"
+            android:icon="@drawable/icon_cards"
+            android:title="@string/menu_cards" />
+
+        <item
+            android:id="@+id/nav_diary"
+            android:icon="@drawable/icon_diary"
+            android:title="@string/menu_diary" />
+
+        <item
+            android:id="@+id/nav_canvas"
+            android:icon="@drawable/icon_canvas"
+            android:title="@string/menu_canvas" />
+
+        <item
+            android:id="@+id/nav_video_notes"
+            android:icon="@drawable/icon_video_notes"
+            android:title="@string/menu_video_notes" />
+    </group>
+
+</menu>
