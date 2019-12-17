@@ -9,35 +9,35 @@
         android:id="@+id/nav_remember"
         android:name="com.learn.easy.ui.remember.RememberFragment"
         android:label="@string/menu_remember"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_remember" />
 
     <fragment
         android:id="@+id/nav_fast_read"
         android:name="com.learn.easy.ui.fast_read.FastReadFragment"
         android:label="@string/menu_fast_read"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_fast_read" />
 
     <fragment
         android:id="@+id/nav_running_string"
         android:name="com.learn.easy.ui.running_string.RunningStringFragment"
         android:label="@string/menu_running_string"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_running_string" />
 
     <fragment
         android:id="@+id/nav_check_memory"
         android:name="com.learn.easy.ui.check_memory.CheckMemoryFragment"
         android:label="@string/menu_check_memory"
-        tools:layout="@layout/fragment_tools" />
+        tools:layout="@layout/fragment_check_memory" />
 
     <fragment
         android:id="@+id/nav_word_top"
         android:name="com.learn.easy.ui.word_running_top.WordRunningTopFragment"
         android:label="@string/menu_word_top"
-        tools:layout="@layout/fragment_share" />
+        tools:layout="@layout/fragment_word_running_top" />
 
     <fragment
         android:id="@+id/nav_cards"
         android:name="com.learn.easy.ui.cards.CardsFragment"
         android:label="@string/menu_cards"
-        tools:layout="@layout/fragment_send" />
+        tools:layout="@layout/fragment_cards" />
 </navigation>

@@ -21,7 +21,7 @@ class CheckMemoryFragment : Fragment() {
     ): View? {
         toolsViewModel =
             ViewModelProviders.of(this).get(CheckMemoryViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_tools, container, false)
+        val root = inflater.inflate(R.layout.fragment_check_memory, container, false)
         val textView: TextView = root.findViewById(R.id.text_tools)
         toolsViewModel.text.observe(this, Observer {
             textView.text = it

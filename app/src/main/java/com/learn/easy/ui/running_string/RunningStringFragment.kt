@@ -21,7 +21,7 @@ class RunningStringFragment : Fragment() {
     ): View? {
         slideshowViewModel =
             ViewModelProviders.of(this).get(RunningStringViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_slideshow, container, false)
+        val root = inflater.inflate(R.layout.fragment_running_string, container, false)
         val textView: TextView = root.findViewById(R.id.text_slideshow)
         slideshowViewModel.text.observe(this, Observer {
             textView.text = it

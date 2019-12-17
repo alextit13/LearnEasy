@@ -21,7 +21,7 @@ class FastReadFragment : Fragment() {
     ): View? {
         galleryViewModel =
             ViewModelProviders.of(this).get(FastReadViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_gallery, container, false)
+        val root = inflater.inflate(R.layout.fragment_fast_read, container, false)
         val textView: TextView = root.findViewById(R.id.text_gallery)
         galleryViewModel.text.observe(this, Observer {
             textView.text = it

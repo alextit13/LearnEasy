@@ -21,7 +21,7 @@ class CardsFragment : Fragment() {
     ): View? {
         sendViewModel =
             ViewModelProviders.of(this).get(CardsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_send, container, false)
+        val root = inflater.inflate(R.layout.fragment_cards, container, false)
         val textView: TextView = root.findViewById(R.id.text_send)
         sendViewModel.text.observe(this, Observer {
             textView.text = it
