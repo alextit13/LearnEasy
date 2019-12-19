@@ -19,6 +19,7 @@ class RememberViewModel(private val app: Application) : AndroidViewModel(app) {
 
     fun onClickShowWordMode() {
         showWordSuggestionMode.value = !showWordSuggestionMode.value!!
+        // todo this
     }
 
     fun onClickShowAllMode() {

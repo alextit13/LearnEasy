@@ -22,5 +22,6 @@
     <string name="cd_show_suggestion">Show suggestion</string>
     <string name="back">Back</string>
     <string name="next">Next</string>
+    <string name="speed">Speed</string>
 
 </resources>
