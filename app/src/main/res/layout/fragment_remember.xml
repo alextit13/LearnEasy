@@ -9,52 +9,52 @@
         android:id="@+id/ibShowWordMode"
         android:layout_width="85dp"
         android:layout_height="85dp"
-        android:clickable="true"
-        android:focusable="true"
         android:layout_marginStart="16dp"
         android:background="@drawable/bg_round_button"
+        android:clickable="true"
+        android:contentDescription="@string/cd_show_suggestion"
+        android:focusable="true"
         android:padding="16dp"
         android:scaleType="fitXY"
         android:src="@drawable/icon_remember"
         android:tint="@color/gray_medium"
         app:layout_constraintBottom_toBottomOf="@+id/ibShowAllMode"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ibShowAllMode"
-        android:contentDescription="@string/cd_show_suggestion" />
+        app:layout_constraintTop_toTopOf="@+id/ibShowAllMode" />
 
     <ImageButton
         android:id="@+id/ibShowAllMode"
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:layout_marginTop="16dp"
-        android:clickable="true"
-        android:focusable="true"
         android:background="@drawable/bg_round_button"
+        android:clickable="true"
+        android:contentDescription="@string/cd_show_all"
+        android:focusable="true"
         android:padding="16dp"
         android:scaleType="fitXY"
         android:src="@drawable/icon_show_all"
         android:tint="@color/gray_medium"
         app:layout_constraintEnd_toStartOf="@+id/ibRefreshAll"
         app:layout_constraintStart_toEndOf="@+id/ibShowWordMode"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/cd_show_all"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/ibRefreshAll"
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:layout_marginEnd="16dp"
-        android:clickable="true"
-        android:focusable="true"
         android:background="@drawable/bg_round_button"
+        android:clickable="true"
+        android:contentDescription="@string/cd_refresh"
+        android:focusable="true"
         android:padding="16dp"
         android:scaleType="fitXY"
         android:src="@drawable/icon_refresh"
         android:tint="@color/gray_medium"
         app:layout_constraintBottom_toBottomOf="@+id/ibShowAllMode"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ibShowAllMode"
-        android:contentDescription="@string/cd_refresh"/>
+        app:layout_constraintTop_toTopOf="@+id/ibShowAllMode" />
 
     <TextView
         android:id="@+id/tvRemember"
@@ -63,10 +63,10 @@
         android:layout_margin="@dimen/margin_default"
         android:layout_marginBottom="16dp"
         android:background="@drawable/bg_text_remember_stroke"
+        android:gravity="center"
         android:padding="@dimen/padding_default"
         android:scrollbars="vertical"
         android:textAlignment="center"
-        android:gravity="center"
         android:textColor="@color/black"
         android:textSize="44sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
@@ -81,8 +81,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:orientation="horizontal"
         android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/fabSelectDoc"
         tools:layout_editor_absoluteX="-16dp">
 
@@ -90,30 +90,34 @@
             android:id="@+id/ivPreviousPage"
             android:layout_width="65dp"
             android:layout_height="65dp"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="@string/back"
             android:src="@drawable/icon_previous" />
 
         <TextView
             android:id="@+id/tvPages"
-            android:textSize="24sp"
-            android:textColor="@color/gray_dark"
-            tools:text="5 из 43"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray_dark"
+            android:textSize="24sp"
+            tools:text="5 из 43" />
 
         <ImageView
             android:id="@+id/ivNextPage"
             android:layout_width="65dp"
             android:layout_height="65dp"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="@string/next"
             android:src="@drawable/icon_next" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabSelectDoc"
-        android:src="@drawable/icon_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
+        android:src="@drawable/icon_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

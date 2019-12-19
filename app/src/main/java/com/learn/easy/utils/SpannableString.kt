@@ -5,6 +5,7 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.BackgroundColorSpan
 import android.text.style.ForegroundColorSpan
+import androidx.core.text.clearSpans
 
 val pages: MutableList<Page> = mutableListOf()
 private const val COUNT_WORD_ON_PAGE = 10
@@ -23,7 +24,7 @@ fun createPages(s: String) {
         tenWords = "$tenWords$element "
         iterator++
 
-        if (iterator == COUNT_WORD_ON_PAGE || iteratorLast ==  words.size - 1) {
+        if (iterator == COUNT_WORD_ON_PAGE || iteratorLast == words.size - 1) {
             val page = Page()
             page.number = iteratePages
             page.text = tenWords
@@ -34,8 +35,6 @@ fun createPages(s: String) {
             iteratePages++
         }
     }
-
-    println("sdf")
 }
 
 fun getWordArray(s: String): MutableList<Int> {
@@ -49,27 +48,34 @@ fun getWordArray(s: String): MutableList<Int> {
     return indexes
 }
 
-fun getSpannableString(s: String, callback: (SpannableString) -> Unit) {
-    val ss = SpannableString(s)
+fun getSpannableString(allText: String, isShowAll: Boolean, callback: (SpannableString) -> Unit) {
+    val ss = SpannableString(allText)
 
-    var i = 0
-    val indexes = getWordArray(s)
-    while (i < indexes.size - 1) {
-        val p = Pair(indexes[i] + if (i == 0) 1 else 2, indexes[i + 1])
+    var iteratorWords = 0
+    val indexes = getWordArray(allText)
+    while (iteratorWords < indexes.size - 1) {
+        val p = Pair(
+            indexes[iteratorWords] + if (iteratorWords == 0) 1 else 2,
+            indexes[iteratorWords + 1]
+        )
         if (p.first > p.second) continue
-        ss.setSpan(
-            BackgroundColorSpan(Color.GRAY),
-            p.first,
-            p.second,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        ss.setSpan(
-            ForegroundColorSpan(Color.GRAY),
-            p.first,
-            p.second,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        i += 1
+        if (isShowAll) {
+            ss.clearSpans()
+        } else {
+            ss.setSpan(
+                BackgroundColorSpan(Color.GRAY),
+                p.first,
+                p.second,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            ss.setSpan(
+                ForegroundColorSpan(Color.GRAY),
+                p.first,
+                p.second,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+        iteratorWords += 1
     }
 
     callback.invoke(ss)

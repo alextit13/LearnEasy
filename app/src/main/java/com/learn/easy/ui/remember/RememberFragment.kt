@@ -1,13 +1,12 @@
 package com.learn.easy.ui.remember
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.os.Bundle
-import android.text.method.LinkMovementMethod
 import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -65,6 +64,10 @@ class RememberFragment : Fragment() {
 
             currentPageViewModel.observe(this@RememberFragment, Observer {
                 tvPages.text = "${it.first} / ${it.second}"
+            })
+
+            showWordSuggestionMode.observe(this@RememberFragment, Observer {
+                ibShowWordMode.setBackgroundResource(if (it) R.drawable.bg_round_button_pressed else R.drawable.bg_round_button)
             })
         }
     }

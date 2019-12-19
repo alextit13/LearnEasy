@@ -15,17 +15,22 @@ class RememberViewModel(private val app: Application) : AndroidViewModel(app) {
     val chooserLiveData = MutableLiveData<SingleEvent<Boolean>>()
     val textViewModel = MutableLiveData<SpannableString>()
     val currentPageViewModel = MutableLiveData<Pair<Int, Int>>()
+    val showWordSuggestionMode = MutableLiveData<Boolean>(false)
 
     fun onClickShowWordMode() {
-        // todo this
+        showWordSuggestionMode.value = !showWordSuggestionMode.value!!
     }
 
     fun onClickShowAllMode() {
-        // todo this
+        getSpannableString(pages[currentPage].text, true) {
+            textViewModel.value = it
+        }
     }
 
     fun onClickRefreshAll() {
-        // todo this
+        getSpannableString(pages[currentPage].text, false) {
+            textViewModel.value = it
+        }
     }
 
     fun onClickSelectDoc() {
@@ -40,7 +45,7 @@ class RememberViewModel(private val app: Application) : AndroidViewModel(app) {
         if (currentPage == pages.size - 1) return
         currentPage++
         pagesIterator++
-        getSpannableString(pages[currentPage].text) {
+        getSpannableString(pages[currentPage].text, false) {
             textViewModel.value = it
         }
         currentPageViewModel.value = Pair(pagesIterator, pages.size)
@@ -50,7 +55,7 @@ class RememberViewModel(private val app: Application) : AndroidViewModel(app) {
         if (currentPage == 0) return
         currentPage--
         pagesIterator--
-        getSpannableString(pages[currentPage].text) {
+        getSpannableString(pages[currentPage].text, false) {
             textViewModel.value = it
         }
         currentPageViewModel.value = Pair(pagesIterator, pages.size)
@@ -58,7 +63,7 @@ class RememberViewModel(private val app: Application) : AndroidViewModel(app) {
 
     fun makeSpannableString(s: String) {
         createPages(s)
-        getSpannableString(pages[0].text) {
+        getSpannableString(pages[0].text, false) {
             textViewModel.value = it
         }
         currentPageViewModel.value = Pair(pagesIterator, pages.size)
