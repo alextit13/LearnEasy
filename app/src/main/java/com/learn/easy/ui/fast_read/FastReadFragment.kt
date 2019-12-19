@@ -1,9 +1,9 @@
 package com.learn.easy.ui.fast_read
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.SeekBar
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.learn.easy.R
@@ -16,6 +16,7 @@ class FastReadFragment : BaseFragment(R.layout.fragment_fast_read) {
         ViewModelProviders.of(this).get(FastReadViewModel::class.java)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -27,7 +28,7 @@ class FastReadFragment : BaseFragment(R.layout.fragment_fast_read) {
             chooserLiveData.observe(this@FastReadFragment, Observer {
                 if (it.getContentIfNotHandled() != null) {
                     selectFile {
-                        viewModel
+                        viewModel.onSelectDocumentResult(it)
                     }
                 }
             })
