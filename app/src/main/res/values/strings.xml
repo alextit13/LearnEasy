@@ -23,5 +23,9 @@
     <string name="back">Back</string>
     <string name="next">Next</string>
     <string name="speed">Speed</string>
+    <string name="lbl_name">Name</string>
+    <string name="lbl_color">Color</string>
+    <string name="lbl_width">Width</string>
+    <string name="lbl_clear">Clear</string>
 
 </resources>

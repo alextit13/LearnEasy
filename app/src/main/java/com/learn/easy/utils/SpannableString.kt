@@ -13,7 +13,6 @@ var currentPage = 0
 var pagesIterator = 1
 
 fun createPages(s: String) {
-
     pages.clear()
     val words = s.split(" ")
     var tenWords = ""

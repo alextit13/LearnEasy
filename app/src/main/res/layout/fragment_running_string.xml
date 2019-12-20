@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTitleSpeedRunningString" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvFastReader"
+        android:id="@+id/cvCheckMemory"
         android:layout_width="0dp"
         android:layout_height="120dp"
         android:layout_marginStart="16dp"
@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/seekBarRunningString">
 
         <com.learn.easy.utils.ScrollTextView
-            android:id="@+id/tvFastReaderRunningString"
+            android:id="@+id/tvCheckMemory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
@@ -85,7 +85,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/ivStopRunningString"
+        android:id="@+id/ivStopCheckMemory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -94,10 +94,10 @@
         android:src="@drawable/icon_stop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvFastReader" />
+        app:layout_constraintTop_toBottomOf="@+id/cvCheckMemory" />
 
     <ImageView
-        android:id="@+id/ivPauseRunningString"
+        android:id="@+id/ivPauseCheckMemory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="16dp"
@@ -106,10 +106,10 @@
         android:src="@drawable/icon_pause"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivStopRunningString" />
+        app:layout_constraintTop_toBottomOf="@+id/ivStopCheckMemory" />
 
     <ImageView
-        android:id="@+id/ivPlayRunningString"
+        android:id="@+id/ivPlayCheckMemory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -118,10 +118,10 @@
         android:src="@drawable/icon_play"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivPauseRunningString" />
+        app:layout_constraintTop_toBottomOf="@+id/ivPauseCheckMemory" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabRunningString"
+        android:id="@+id/fabCheckMemory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"

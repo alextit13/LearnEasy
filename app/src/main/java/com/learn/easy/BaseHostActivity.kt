@@ -26,7 +26,8 @@ class BaseHostActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_remember, R.id.nav_fast_read, R.id.nav_running_string,
-                R.id.nav_check_memory, R.id.nav_word_top, R.id.nav_cards
+                R.id.nav_check_memory, R.id.nav_word_top, R.id.nav_cards,
+                R.id.nav_diary, R.id.nav_canvas, R.id.nav_video_notes
             ), drawer_layout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

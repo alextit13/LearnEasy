@@ -29,12 +29,12 @@ class RunningStringFragment : BaseFragment(R.layout.fragment_running_string) {
                 }
             })
             speedLiveData.observe(this@RunningStringFragment, Observer {
-                tvFastReaderRunningString.apply {
+                tvCheckMemory.apply {
                     rndDuration = it
                 }
             })
             textLiveData.observe(this@RunningStringFragment, Observer {
-                tvFastReaderRunningString.apply {
+                tvCheckMemory.apply {
                     text = it
                     startScroll()
                     pauseScroll()
@@ -42,9 +42,9 @@ class RunningStringFragment : BaseFragment(R.layout.fragment_running_string) {
             })
             pauseLiveData.observe(this@RunningStringFragment, Observer {
                 if (it.getContentIfNotHandled()!!) {
-                    tvFastReaderRunningString.pauseScroll()
+                    tvCheckMemory.pauseScroll()
                 } else {
-                    tvFastReaderRunningString.resumeScroll()
+                    tvCheckMemory.resumeScroll()
                 }
             })
             viewWasInit()
@@ -57,9 +57,9 @@ class RunningStringFragment : BaseFragment(R.layout.fragment_running_string) {
             @SuppressLint("SetTextI18n")
             override fun onProgressChanged(seekBar: SeekBar?, position: Int, isUser: Boolean) {
                 if (isUser) {
-                    tvFastReaderRunningString.pauseScroll()
+                    tvCheckMemory.pauseScroll()
                     viewModel.onSpeedChanged(position)
-                    tvFastReaderRunningString.resumeScroll()
+                    tvCheckMemory.resumeScroll()
                     tvTitleSpeedRunningString.text = "${activity?.getString(R.string.speed)} $position"
                 }
             }
@@ -72,9 +72,9 @@ class RunningStringFragment : BaseFragment(R.layout.fragment_running_string) {
 
             }
         })
-        ivStopRunningString.setOnClickListener { viewModel.onClickStop() }
-        ivPauseRunningString.setOnClickListener { viewModel.onClickPause() }
-        ivPlayRunningString.setOnClickListener { viewModel.onClickPlay() }
-        fabRunningString.setOnClickListener { viewModel.onClickOpenFile() }
+        ivStopCheckMemory.setOnClickListener { viewModel.onClickStop() }
+        ivPauseCheckMemory.setOnClickListener { viewModel.onClickPause() }
+        ivPlayCheckMemory.setOnClickListener { viewModel.onClickPlay() }
+        fabCheckMemory.setOnClickListener { viewModel.onClickOpenFile() }
     }
 }

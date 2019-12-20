@@ -40,4 +40,10 @@
         android:name="com.learn.easy.ui.cards.CardsFragment"
         android:label="@string/menu_cards"
         tools:layout="@layout/fragment_cards" />
+
+    <fragment
+        android:id="@+id/nav_canvas"
+        android:name="com.learn.easy.ui.canvas.CanvasFragment"
+        android:label="@string/menu_canvas"
+        tools:layout="@layout/fragment_canvas"/>
 </navigation>

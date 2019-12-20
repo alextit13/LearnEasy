@@ -1,31 +1,71 @@
 package com.learn.easy.ui.check_memory
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
+import android.widget.SeekBar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.learn.easy.R
+import com.learn.easy.ui.BaseFragment
+import kotlinx.android.synthetic.main.fragment_check_memory.*
 
-class CheckMemoryFragment : Fragment() {
+class CheckMemoryFragment : BaseFragment(R.layout.fragment_check_memory) {
 
-    private lateinit var toolsViewModel: CheckMemoryViewModel
+    private val viewModel: CheckMemoryViewModel by lazy {
+        ViewModelProviders.of(this).get(CheckMemoryViewModel::class.java)
+    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        toolsViewModel =
-            ViewModelProviders.of(this).get(CheckMemoryViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_check_memory, container, false)
-        val textView: TextView = root.findViewById(R.id.text_tools)
-        toolsViewModel.text.observe(this, Observer {
-            textView.text = it
+    @SuppressLint("SetTextI18n")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.apply {
+            chooserLiveData.observe(this@CheckMemoryFragment, Observer {
+                if (it.getContentIfNotHandled() != null) {
+                    selectFile {
+                        viewModel.onSelectDocumentResult(it)
+                    }
+                }
+            })
+            speedLiveData.observe(this@CheckMemoryFragment, Observer {
+                tvCheckMemory.apply {
+                    // todo this
+                }
+            })
+            textLiveData.observe(this@CheckMemoryFragment, Observer {
+                tvCheckMemory.apply {
+                    text = it
+                }
+            })
+            pauseLiveData.observe(this@CheckMemoryFragment, Observer {
+                // todo this
+            })
+            viewWasInit()
+        }
+        initClickers()
+    }
+
+    private fun initClickers() {
+        seekBarCheckMemory.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            @SuppressLint("SetTextI18n")
+            override fun onProgressChanged(seekBar: SeekBar?, position: Int, isUser: Boolean) {
+                if (isUser) {
+                    // todo this
+                }
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+
+            }
         })
-        return root
+        ivStopCheckMemory.setOnClickListener { viewModel.onClickStop() }
+        ivPauseCheckMemory.setOnClickListener { viewModel.onClickPause() }
+        ivPlayCheckMemory.setOnClickListener { viewModel.onClickPlay() }
+        fabCheckMemory.setOnClickListener { viewModel.onClickOpenFile() }
     }
 }
