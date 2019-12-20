@@ -29,11 +29,8 @@ class RunningStringFragment : BaseFragment(R.layout.fragment_running_string) {
                 }
             })
             speedLiveData.observe(this@RunningStringFragment, Observer {
-                tvTitleSpeedRunningString.text = "${activity?.getString(R.string.speed)} $it"
                 tvFastReaderRunningString.apply {
-                    pauseScroll()
                     rndDuration = it
-                    startScroll()
                 }
             })
             textLiveData.observe(this@RunningStringFragment, Observer {
@@ -57,9 +54,13 @@ class RunningStringFragment : BaseFragment(R.layout.fragment_running_string) {
 
     private fun initClickers() {
         seekBarRunningString.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            @SuppressLint("SetTextI18n")
             override fun onProgressChanged(seekBar: SeekBar?, position: Int, isUser: Boolean) {
                 if (isUser) {
+                    tvFastReaderRunningString.pauseScroll()
                     viewModel.onSpeedChanged(position)
+                    tvFastReaderRunningString.resumeScroll()
+                    tvTitleSpeedRunningString.text = "${activity?.getString(R.string.speed)} $position"
                 }
             }
 

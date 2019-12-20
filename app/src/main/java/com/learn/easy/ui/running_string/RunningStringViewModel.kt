@@ -7,8 +7,6 @@ import com.learn.easy.utils.SingleEvent
 
 class RunningStringViewModel : ViewModel() {
 
-    // 15_000 - 60_000 max - min
-
     private val minSpeed = 15_000
     private val maxSpeed = 60_000
 
@@ -24,10 +22,11 @@ class RunningStringViewModel : ViewModel() {
     fun viewWasInit() {
         textLiveData.value = book?.text ?: ""
         pauseLiveData.value = SingleEvent(true)
+        speedLiveData.value = (maxSpeed - minSpeed) / 2
     }
 
     fun onSpeedChanged(position: Int) {
-        val a = ((maxSpeed - minSpeed) / 100) * position
+        val a = maxSpeed - ((maxSpeed - minSpeed) / 100) * position
         speedLiveData.value = a
     }
 
