@@ -4,10 +4,12 @@ import android.app.Application
 import android.graphics.Color
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.learn.easy.R
+import com.learn.easy.db.DBGate
 import com.learn.easy.utils.DrawingView.DEFAULT_WIDTH
+import com.learn.easy.utils.Paint
 import com.learn.easy.utils.SingleEvent
+import java.io.File
 
 class CanvasViewModel(val app: Application) : AndroidViewModel(app) {
 
@@ -23,6 +25,8 @@ class CanvasViewModel(val app: Application) : AndroidViewModel(app) {
 
     val toast = MutableLiveData<SingleEvent<String>>()
     val savePaint = MutableLiveData<SingleEvent<String>>()
+
+    val listPaints = MutableLiveData<SingleEvent<Boolean>>()
 
     fun onClickBtnSave(name: String) {
         if (name.isEmpty()) {
@@ -81,5 +85,14 @@ class CanvasViewModel(val app: Application) : AndroidViewModel(app) {
         }
 
         widthSelect.value = SingleEvent(width)
+    }
+
+    fun saveImageWasSuccess(fileImage: File, nameImage: String) {
+        val paint = Paint(nameImage, fileImage.absolutePath)
+        DBGate.newInstance(app).insertPaint(paint)
+    }
+
+    fun onClickListPaints() {
+        listPaints.value = SingleEvent(true)
     }
 }

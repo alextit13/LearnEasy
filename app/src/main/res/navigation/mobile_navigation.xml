@@ -45,5 +45,27 @@
         android:id="@+id/nav_canvas"
         android:name="com.learn.easy.ui.canvas.CanvasFragment"
         android:label="@string/menu_canvas"
-        tools:layout="@layout/fragment_canvas"/>
+        tools:layout="@layout/fragment_canvas">
+        <action
+            android:id="@+id/action_nav_canvas_to_listPaintsFragment"
+            app:destination="@id/listPaintsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listPaintsFragment"
+        android:name="com.learn.easy.ui.canvas.list.ListPaintsFragment"
+        android:label="Paint"
+        tools:layout="@layout/fragment_list_paints">
+        <action
+            android:id="@+id/action_listPaintsFragment_to_imageViewFragment"
+            app:destination="@id/imageViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/imageViewFragment"
+        android:name="com.learn.easy.ui.canvas.list.ImageViewFragment"
+        android:label="Image"
+        tools:layout="@layout/fragment_image_view">
+        <argument
+            android:name="urlImage"
+            app:argType="string" />
+    </fragment>
 </navigation>

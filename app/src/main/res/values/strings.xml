@@ -7,7 +7,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    
+
     <string name="menu_remember">Remember</string>
     <string name="menu_fast_read">Fast read</string>
     <string name="menu_running_string">Running string</string>
@@ -48,5 +48,13 @@
     <string name="w_1_9">1,9</string>
     <string name="w_2">2</string>
     <string name="enter_name">Enter name</string>
+    <string name="save_success">Save success</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="delete">Delete</string>
+    <string name="delete_paint">Delete paint?</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

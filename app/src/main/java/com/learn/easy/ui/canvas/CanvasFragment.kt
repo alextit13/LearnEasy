@@ -6,11 +6,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.learn.easy.R
 import com.learn.easy.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_canvas.*
+import java.io.File
 
-class CanvasFragment : BaseFragment(R.layout.fragment_canvas) {
+class CanvasFragment : BaseFragment(R.layout.fragment_canvas), ISavePaintCallback {
 
     private var colorDefaultPosition = 0
     private var widthDefaultPosition = 0
@@ -70,7 +72,17 @@ class CanvasFragment : BaseFragment(R.layout.fragment_canvas) {
                     savePaint(it.content())
                 }
             })
+
+            listPaints.observe(this@CanvasFragment, Observer {
+                if (it.getContentIfNotHandled() != null) {
+                    openListPaints()
+                }
+            })
         }
+    }
+
+    private fun openListPaints() {
+        findNavController().navigate(R.id.action_nav_canvas_to_listPaintsFragment)
     }
 
     private fun showWidthPicker() {
@@ -123,10 +135,18 @@ class CanvasFragment : BaseFragment(R.layout.fragment_canvas) {
         llColor.setOnClickListener { viewModel.onClickColor() }
         llWidth.setOnClickListener { viewModel.onClickWidth() }
         llClear.setOnClickListener { viewModel.onClickClear() }
+        ibListPaints.setOnClickListener { viewModel.onClickListPaints() }
     }
 
     private fun savePaint(name: String){
-        drawingView.savePaint(name)
+        drawingView.savePaint(name, this)
+    }
+
+    override fun saveSuccess(fileImage: File, nameImage: String) {
+        activity?.runOnUiThread {
+            viewModel.saveImageWasSuccess(fileImage, nameImage)
+            Toast.makeText(activity, getString(R.string.save_success), Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun clear() {
@@ -139,9 +159,5 @@ class CanvasFragment : BaseFragment(R.layout.fragment_canvas) {
 
     private fun setColor(color: Int) {
         drawingView.setColor(color)
-    }
-
-    interface ISavePaintCallback {
-        fun saveSuccess()
     }
 }

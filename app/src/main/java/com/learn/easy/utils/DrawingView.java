@@ -14,6 +14,8 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.learn.easy.ui.canvas.ISavePaintCallback;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
@@ -93,7 +95,7 @@ public class DrawingView extends View {
         invalidate();
     }
 
-    public void savePaint(String name) {
+    public void savePaint(String name, ISavePaintCallback callback) {
         new Thread(() -> {
             try {
                 Bitmap bitmap = Bitmap.createBitmap(
@@ -102,16 +104,21 @@ public class DrawingView extends View {
                 Canvas canvas = new Canvas(bitmap);
                 DrawingView.this.draw(canvas);
 
-                File file = new File(Environment.getExternalStorageDirectory() + "/" +
+                File dir = new File(Environment.getExternalStorageDirectory() + "/" +
                         new Date().getTime() + "/" +
-                        "paints/" +
+                        "paints/");
+
+                File file = new File(dir + "/" +
                         name + ".png");
 
-                if (!file.exists()) {
-                    file.createNewFile();
+                if (!dir.exists()) {
+                    dir.mkdirs();
                 }
 
+                file.createNewFile();
+
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(file));
+                callback.saveSuccess(file, name + ".png");
             } catch (Exception e) {
                 e.printStackTrace();
             }

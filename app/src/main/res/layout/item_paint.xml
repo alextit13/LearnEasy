@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:background="?attr/selectableItemBackground"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/ivIconPaint"
+        android:elevation="8dp"
+        android:background="@drawable/back_stroke_around_paint"
+        android:src="@drawable/icon_image_stub"
+        android:layout_width="75dp"
+        android:layout_height="75dp"/>
+
+    <TextView
+        android:id="@+id/tvPaintName"
+        tools:text="Name of paint"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:textSize="24sp"
+        android:layout_marginStart="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

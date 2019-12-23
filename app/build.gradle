@@ -50,4 +50,7 @@ dependencies {
 
     // file picker
     implementation 'com.github.TutorialsAndroid:FilePicker:v5.0.19'
+
+    // images
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
