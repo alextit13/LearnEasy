@@ -53,4 +53,7 @@ dependencies {
 
     // images
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    // text spans
+    implementation 'com.github.bachors:Android-WordToSpan:3.1'
 }

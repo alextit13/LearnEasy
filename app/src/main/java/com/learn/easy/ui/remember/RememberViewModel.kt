@@ -10,7 +10,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.learn.easy.utils.*
 
-class RememberViewModel(private val app: Application) : AndroidViewModel(app) {
+class RememberViewModel(app: Application) : AndroidViewModel(app) {
 
     val chooserLiveData = MutableLiveData<SingleEvent<Boolean>>()
     val textViewModel = MutableLiveData<SpannableString>()

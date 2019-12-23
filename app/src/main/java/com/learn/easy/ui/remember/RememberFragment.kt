@@ -2,12 +2,16 @@ package com.learn.easy.ui.remember
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.method.ScrollingMovementMethod
+import android.text.method.LinkMovementMethod
+import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.bachors.wordtospan.WordToSpan
 import com.learn.easy.R
 import com.learn.easy.ui.BaseFragment
+import com.learn.easy.utils.WordFinder.findWordForRightHanded
 import kotlinx.android.synthetic.main.fragment_remember.*
 
 class RememberFragment : BaseFragment(R.layout.fragment_remember) {
@@ -22,7 +26,9 @@ class RememberFragment : BaseFragment(R.layout.fragment_remember) {
         initListeners()
         callbacks()
 
-        viewModel.makeSpannableString("История с выходным 31 декабря закрутилась еще в конце октября. Тогда появилась петиция о том, чтобы сделать выходными не только 1 и 2 января, но также 31 декабря, и не отрабатывать эти дни в субботы. Петицию подписали более 15 тысяч человек. В начале ноября премьер-министр Сергей Румас пообещал рассмотреть это предложение, а 6 декабря рассказал, к какому решению пришли чиновники. Вот и все")
+        val s = "История с выходным 31 декабря закрутилась еще в конце октября. Тогда появилась петиция о том, чтобы сделать выходными не только 1 и 2 января, но также 31 декабря, и не отрабатывать эти дни в субботы. Петицию подписали более 15 тысяч человек. В начале ноября премьер-министр Сергей Румас пообещал рассмотреть это предложение, а 6 декабря рассказал, к какому решению пришли чиновники. Вот и все"
+        // viewModel.makeSpannableString(s)
+        tvRemember.text = s
     }
 
     private fun initListeners() {
@@ -32,7 +38,18 @@ class RememberFragment : BaseFragment(R.layout.fragment_remember) {
         fabSelectDoc.setOnClickListener { viewModel.onClickSelectDoc() }
         ivPreviousPage.setOnClickListener { viewModel.onClickPreviousPage() }
         ivNextPage.setOnClickListener { viewModel.onClickNextPage() }
-        tvRemember.movementMethod = ScrollingMovementMethod()
+        // tvRemember.movementMethod = LinkMovementMethod.getInstance()
+
+        tvRemember.setOnTouchListener { view, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+                val mOffset = tvRemember.getOffsetForPosition(motionEvent.getX(), motionEvent.getY());
+                //  mTxtOffset.setText("" + mOffset);
+                val sts = findWordForRightHanded(tvRemember.text.toString(), mOffset)
+                println("sdl;kfskd")
+            }
+
+            false
+        }
     }
 
     @SuppressLint("SetTextI18n")

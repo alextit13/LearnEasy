@@ -3,8 +3,9 @@ package com.learn.easy.utils
 import android.graphics.Color
 import android.text.SpannableString
 import android.text.Spanned
-import android.text.style.BackgroundColorSpan
-import android.text.style.ForegroundColorSpan
+import android.text.TextPaint
+import android.text.style.ClickableSpan
+import android.view.View
 import androidx.core.text.clearSpans
 
 val pages: MutableList<Page> = mutableListOf()
@@ -62,13 +63,18 @@ fun getSpannableString(allText: String, isShowAll: Boolean, callback: (Spannable
             ss.clearSpans()
         } else {
             ss.setSpan(
-                BackgroundColorSpan(Color.GRAY),
-                p.first,
-                p.second,
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-            ss.setSpan(
-                ForegroundColorSpan(Color.GRAY),
+                object : ClickableSpan(){
+                    override fun onClick(p0: View) {
+                        println(";sdlflsdkf")
+                    }
+
+                    override fun updateDrawState(ds: TextPaint) {
+                        super.updateDrawState(ds)
+                        ds.linkColor = Color.GRAY
+                        ds.bgColor = Color.GRAY
+                        ds.color = Color.GRAY
+                    }
+                },
                 p.first,
                 p.second,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
