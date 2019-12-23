@@ -1,35 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/etTitleCanvas"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_default"
-        android:layout_marginStart="14dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:hint="@string/lbl_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/llColor"
+        app:layout_constraintEnd_toStartOf="@+id/btnSaveCanvas"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnSaveCanvas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="@+id/etTitleCanvas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/etTitleCanvas"
+        app:layout_constraintTop_toTopOf="@+id/etTitleCanvas" />
 
     <LinearLayout
         android:id="@+id/llColor"
-        android:background="?attr/selectableItemBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
         android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackground"
         android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/llWidth"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/llClear"
         app:layout_constraintTop_toBottomOf="@+id/etTitleCanvas">
 
         <TextView
@@ -44,25 +57,26 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_gravity="center"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            android:background="#000" />
+            android:src="@drawable/back_color_picker_gradient" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llWidth"
-        android:background="?attr/selectableItemBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackground"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/llColor"
         app:layout_constraintTop_toBottomOf="@+id/etTitleCanvas">
 
         <TextView
@@ -80,20 +94,22 @@
             android:layout_height="5dp"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            android:background="#000" />
+            android:background="#262626" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llClear"
-        android:background="?attr/selectableItemBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackground"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="@+id/etTitleCanvas"
+        app:layout_constraintEnd_toStartOf="@+id/llColor"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etTitleCanvas">
 
         <TextView
@@ -115,6 +131,12 @@
 
     </LinearLayout>
 
-
+    <com.learn.easy.utils.DrawingView
+        android:id="@+id/drawingView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/margin_default"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llColor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

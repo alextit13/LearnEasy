@@ -13,4 +13,8 @@ open class SingleEvent<out T>(private val content: T) {
             content
         }
     }
+
+    fun content(): T {
+        return content
+    }
 }
