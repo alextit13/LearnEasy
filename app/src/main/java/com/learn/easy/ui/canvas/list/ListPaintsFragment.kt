@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.learn.easy.R
 import com.learn.easy.utils.Paint
+import kotlinx.android.synthetic.main.fragment_list_paints.*
 
 class ListPaintsFragment : Fragment(R.layout.fragment_list_paints) {
 
@@ -34,7 +35,7 @@ class ListPaintsFragment : Fragment(R.layout.fragment_list_paints) {
     }
 
     private fun initAdapter(list: MutableList<Paint>) {
-        PaintAdapter(list, {
+        rvPaints.adapter = PaintAdapter(list, {
             findNavController().navigate(R.id.action_listPaintsFragment_to_imageViewFragment,
                 Bundle().apply {
                     putString("urlImage", it.imagePath)

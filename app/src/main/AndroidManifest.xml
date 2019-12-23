@@ -15,6 +15,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
+            android:windowSoftInputMode="adjustNothing"
             android:name=".BaseHostActivity"
             android:label="@string/title_activity_base_host"
             android:theme="@style/AppTheme.NoActionBar">
