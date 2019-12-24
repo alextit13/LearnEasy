@@ -15,11 +15,15 @@ class RememberViewModel(app: Application) : AndroidViewModel(app) {
     val chooserLiveData = MutableLiveData<SingleEvent<Boolean>>()
     val textViewModel = MutableLiveData<SpannableString>()
     val currentPageViewModel = MutableLiveData<Pair<Int, Int>>()
-    val showWordSuggestionMode = MutableLiveData<Boolean>(false)
+    val showWordSuggestionMode = MutableLiveData<SingleEvent<Boolean>>()
+
+    fun isWordSuggestionEnable(): Boolean {
+        return showWordSuggestionMode.value?.content() ?: false
+    }
 
     fun onClickShowWordMode() {
-        showWordSuggestionMode.value = !showWordSuggestionMode.value!!
-        // todo this
+        val isWordSuggestion = showWordSuggestionMode.value?.content() ?: false
+        showWordSuggestionMode.value = SingleEvent(!isWordSuggestion)
     }
 
     fun onClickShowAllMode() {

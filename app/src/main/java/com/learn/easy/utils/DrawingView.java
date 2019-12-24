@@ -51,11 +51,6 @@ public class DrawingView extends View {
         initDefaultData(context);
     }
 
-    public DrawingView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        initDefaultData(context);
-    }
-
     private void initDefaultData(Context c) {
         initDefaultPaint();
 
@@ -132,6 +127,8 @@ public class DrawingView extends View {
 
         mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         mCanvas = new Canvas(mBitmap);
+
+        clear();
     }
 
     @Override

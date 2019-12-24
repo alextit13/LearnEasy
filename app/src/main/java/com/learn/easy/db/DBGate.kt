@@ -44,8 +44,9 @@ class DBGate(private val context: Context) {
         return list
     }
 
-    fun deletePaint(name: String) {
-
+    fun deletePaint(name: String): Boolean {
+        return DBHelper.newInstance(context).writableDatabase
+            .delete("paints", "name=?", arrayOf(name)) > 0
     }
 
     companion object {

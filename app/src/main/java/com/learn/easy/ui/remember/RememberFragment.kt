@@ -38,7 +38,9 @@ class RememberFragment : BaseFragment(R.layout.fragment_remember) {
         ivNextPage.setOnClickListener { viewModel.onClickNextPage() }
 
         tvRemember.setOnTouchListener { _, motionEvent ->
-            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+            if (motionEvent.action == MotionEvent.ACTION_DOWN
+                && viewModel.isWordSuggestionEnable()
+            ) {
                 clickableSpan(tvRemember, motionEvent)
             }
             false
@@ -65,7 +67,12 @@ class RememberFragment : BaseFragment(R.layout.fragment_remember) {
             })
 
             showWordSuggestionMode.observe(this@RememberFragment, Observer {
-                ibShowWordMode.setBackgroundResource(if (it) R.drawable.bg_round_button_pressed else R.drawable.bg_round_button)
+                ibShowWordMode.setBackgroundResource(
+                    if (it.content())
+                        R.drawable.bg_round_button_pressed
+                    else
+                        R.drawable.bg_round_button
+                )
             })
         }
     }
