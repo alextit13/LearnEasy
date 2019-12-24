@@ -1,7 +1,7 @@
 package com.learn.easy.utils;
 
 public class WordFinder {
-    public static String findWordForRightHanded(String str, int offset) { // when you touch ' ', this method returns left word.
+    public static Offset findWordForRightHanded(String str, int offset) { // when you touch ' ', this method returns left word.
         if (str.length() == offset) {
             offset--; // without this code, you will get exception when touching end of the text
         }
@@ -38,6 +38,6 @@ public class WordFinder {
             endIndex--;
         }
 
-        return str.substring(startIndex, endIndex);
+        return new Offset(str.substring(startIndex, endIndex), startIndex, endIndex);
     }
 }

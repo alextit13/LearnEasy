@@ -5,7 +5,9 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
 import android.text.style.ClickableSpan
+import android.view.MotionEvent
 import android.view.View
+import android.widget.TextView
 import androidx.core.text.clearSpans
 
 val pages: MutableList<Page> = mutableListOf()
@@ -63,10 +65,8 @@ fun getSpannableString(allText: String, isShowAll: Boolean, callback: (Spannable
             ss.clearSpans()
         } else {
             ss.setSpan(
-                object : ClickableSpan(){
-                    override fun onClick(p0: View) {
-                        println(";sdlflsdkf")
-                    }
+                object : ClickableSpan() {
+                    override fun onClick(p0: View) {}
 
                     override fun updateDrawState(ds: TextPaint) {
                         super.updateDrawState(ds)
@@ -84,4 +84,28 @@ fun getSpannableString(allText: String, isShowAll: Boolean, callback: (Spannable
     }
 
     callback.invoke(ss)
+}
+
+fun clickableSpan(tvRemember: TextView, motionEvent: MotionEvent){
+    val mOffset = tvRemember.getOffsetForPosition(motionEvent.x, motionEvent.y)
+    val offset = WordFinder.findWordForRightHanded(tvRemember.text.toString(), mOffset)
+    val ss = SpannableString(tvRemember.text)
+    ss.setSpan(
+        object : ClickableSpan() {
+            override fun onClick(p0: View) {}
+
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.isUnderlineText = false
+                ds.linkColor = Color.BLACK
+                ds.bgColor = Color.WHITE
+                ds.color = Color.BLACK
+            }
+        },
+        offset.startPosition,
+        offset.endPosition,
+        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+    )
+
+    tvRemember.text = ss
 }
