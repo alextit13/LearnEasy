@@ -1,11 +1,13 @@
 package com.learn.easy.ui.check_memory
 
-import android.text.SpannableString
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.learn.easy.utils.DocFastReader
 import com.learn.easy.utils.SingleEvent
+import com.learn.easy.utils.addBreaks
 import com.learn.easy.utils.createPages
+import com.learn.easy.utils.pages
+import kotlinx.coroutines.*
+import java.util.*
 
 class CheckMemoryViewModel : ViewModel() {
 
@@ -13,29 +15,31 @@ class CheckMemoryViewModel : ViewModel() {
     private val maxSpeed = 60_000
 
     private var pause = true
+    private var lastPosition = 0
+    private var speed: Int = 500 // 100 - 1000
 
     val chooserLiveData = MutableLiveData<SingleEvent<Boolean>>()
-    val speedLiveData = MutableLiveData(50)
     val textLiveData = MutableLiveData<String>()
     val pauseLiveData = MutableLiveData<SingleEvent<Boolean>>(SingleEvent(true))
+    val markLiveData = MutableLiveData<SingleEvent<Long>>()
 
     fun viewWasInit() {
         pauseLiveData.value = SingleEvent(true)
-        // speedLiveData.value = (maxSpeed - minSpeed) / 2
         createPages(testString())
+        textLiveData.value = pages[0].text.addBreaks()
     }
 
     fun onSpeedChanged(position: Int) {
-        val a = maxSpeed - ((maxSpeed - minSpeed) / 100) * position
-        speedLiveData.value = a
+        speed = maxSpeed - ((maxSpeed - minSpeed) / 100) * position
     }
 
     fun onClickStop() {
-        // todo this
+        pause = true
+        playBook(0)
     }
 
     fun onClickPause() {
-        // todo this
+        pause = true
     }
 
     fun onClickPlay() {
@@ -43,7 +47,34 @@ class CheckMemoryViewModel : ViewModel() {
 
         pause = false
 
+        playBook(lastPosition)
+    }
 
+    private var indexPage = 0
+
+    private fun playBook(startPosition: Int) {
+        GlobalScope.launch {
+            val words = pages[indexPage].text.split(" ")
+            for (i in startPosition until words.size - 1) {
+                withContext(Dispatchers.Main) {
+                    markLiveData.value = SingleEvent(Date().time)
+                }
+                delay(speed.toLong())
+                if (pause) {
+                    lastPosition = i
+                    break
+                }
+
+                if (i == words.size - 2) {
+                    indexPage++
+                    withContext(Dispatchers.Main) {
+                        if (indexPage < pages.size - 1)
+                            textLiveData.value = pages[indexPage].text.addBreaks()
+                    }
+                    playBook(indexPage)
+                }
+            }
+        }
     }
 
     fun onClickOpenFile() {
@@ -55,6 +86,6 @@ class CheckMemoryViewModel : ViewModel() {
     }
 
     private fun testString(): String {
-        return "История с выходным 31 декабря закрутилась еще в конце октября. Тогда появилась петиция о том, чтобы сделать выходными не только 1 и 2 января, но также 31 декабря, и не отрабатывать эти дни в субботы. Петицию подписали более 15 тысяч человек. В начале ноября премьер-министр Сергей Румас пообещал рассмотреть это предложение, а 6 декабря рассказал, к какому решению пришли чиновники. Вот и все"
+        return "История с выходным 31 декабря закрутилась еще в конце октября. Тогда появилась петиция о том"
     }
 }

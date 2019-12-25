@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import androidx.core.text.clearSpans
+import kotlinx.android.synthetic.main.fragment_check_memory.*
 
 val pages: MutableList<Page> = mutableListOf()
 private const val COUNT_WORD_ON_PAGE = 10
@@ -108,4 +109,32 @@ fun clickableSpan(tvRemember: TextView, motionEvent: MotionEvent){
     )
 
     tvRemember.text = ss
+}
+
+var lastBreakIndex = 0
+
+fun getInterval(tvCheckMemory: TextView): Pair<Int, Int> {
+    var index = tvCheckMemory.text.toString().indexOf("\n")
+    val indexes = mutableListOf<Int>()
+    while (index >= 0) {
+        indexes.add(index)
+        index = tvCheckMemory.text.toString().indexOf("\n", index + 1)
+    }
+
+    val start: Int
+    val end: Int
+
+    start = if (lastBreakIndex < indexes.size - 1) {
+        indexes[lastBreakIndex]
+    } else {
+        0
+    }
+
+    end = if (lastBreakIndex < indexes.size - 1) {
+        indexes[lastBreakIndex + if (lastBreakIndex < indexes.size) 1 else 0]
+    } else {
+        start
+    }
+    lastBreakIndex++
+    return Pair(start, end)
 }

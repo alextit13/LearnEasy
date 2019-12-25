@@ -1,13 +1,20 @@
 package com.learn.easy.ui.check_memory
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.BackgroundColorSpan
 import android.view.View
 import android.widget.SeekBar
+import androidx.core.text.clearSpans
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.learn.easy.R
 import com.learn.easy.ui.BaseFragment
+import com.learn.easy.utils.getInterval
+import com.learn.easy.utils.lastBreakIndex
 import kotlinx.android.synthetic.main.fragment_check_memory.*
 
 class CheckMemoryFragment : BaseFragment(R.layout.fragment_check_memory) {
@@ -28,12 +35,8 @@ class CheckMemoryFragment : BaseFragment(R.layout.fragment_check_memory) {
                     }
                 }
             })
-            speedLiveData.observe(this@CheckMemoryFragment, Observer {
-                tvCheckMemory.apply {
-                    // todo this
-                }
-            })
             textLiveData.observe(this@CheckMemoryFragment, Observer {
+                lastBreakIndex = 0
                 tvCheckMemory.apply {
                     text = it
                 }
@@ -41,9 +44,27 @@ class CheckMemoryFragment : BaseFragment(R.layout.fragment_check_memory) {
             pauseLiveData.observe(this@CheckMemoryFragment, Observer {
                 // todo this
             })
+            markLiveData.observe(this@CheckMemoryFragment, Observer {
+                if (it.getContentIfNotHandled() != null) {
+                    setMarkWord()
+                }
+            })
             viewWasInit()
         }
         initClickers()
+    }
+
+    private fun setMarkWord() {
+        val interval = getInterval(tvCheckMemory)
+        val ss = SpannableString(tvCheckMemory.text)
+        ss.clearSpans()
+        ss.setSpan(
+            BackgroundColorSpan(Color.BLUE),
+            interval.first,
+            interval.second,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        tvCheckMemory.text = ss
     }
 
     private fun initClickers() {
@@ -51,7 +72,8 @@ class CheckMemoryFragment : BaseFragment(R.layout.fragment_check_memory) {
             @SuppressLint("SetTextI18n")
             override fun onProgressChanged(seekBar: SeekBar?, position: Int, isUser: Boolean) {
                 if (isUser) {
-                    // todo this
+                    tvTitleCheckMemory.text = "${getString(R.string.speed)} $position"
+                    viewModel.onSpeedChanged(position)
                 }
             }
 
