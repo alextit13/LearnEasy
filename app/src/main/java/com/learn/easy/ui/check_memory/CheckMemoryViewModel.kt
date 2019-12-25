@@ -11,12 +11,14 @@ import java.util.*
 
 class CheckMemoryViewModel : ViewModel() {
 
-    private val minSpeed = 15_000
-    private val maxSpeed = 60_000
+    private val minSpeed = 2_00
+    private val maxSpeed = 1_000
 
     private var pause = true
     private var lastPosition = 0
     private var speed: Int = 500 // 100 - 1000
+
+    private var indexPage = 0
 
     val chooserLiveData = MutableLiveData<SingleEvent<Boolean>>()
     val textLiveData = MutableLiveData<String>()
@@ -35,7 +37,9 @@ class CheckMemoryViewModel : ViewModel() {
 
     fun onClickStop() {
         pause = true
-        playBook(0)
+        lastPosition = 0
+        indexPage = 0
+        textLiveData.value = pages[0].text.addBreaks()
     }
 
     fun onClickPause() {
@@ -50,8 +54,6 @@ class CheckMemoryViewModel : ViewModel() {
         playBook(lastPosition)
     }
 
-    private var indexPage = 0
-
     private fun playBook(startPosition: Int) {
         GlobalScope.launch {
             val words = pages[indexPage].text.split(" ")
@@ -64,14 +66,12 @@ class CheckMemoryViewModel : ViewModel() {
                     lastPosition = i
                     break
                 }
-
-                if (i == words.size - 2) {
+                if (i == 9) { // 10 - 1 words on one page
                     indexPage++
                     withContext(Dispatchers.Main) {
-                        if (indexPage < pages.size - 1)
-                            textLiveData.value = pages[indexPage].text.addBreaks()
+                        textLiveData.value = pages[indexPage].text.addBreaks()
+                        playBook(indexPage)
                     }
-                    playBook(indexPage)
                 }
             }
         }

@@ -116,6 +116,7 @@ var lastBreakIndex = 0
 fun getInterval(tvCheckMemory: TextView): Pair<Int, Int> {
     var index = tvCheckMemory.text.toString().indexOf("\n")
     val indexes = mutableListOf<Int>()
+    indexes.add(0)
     while (index >= 0) {
         indexes.add(index)
         index = tvCheckMemory.text.toString().indexOf("\n", index + 1)

@@ -59,7 +59,7 @@ class CheckMemoryFragment : BaseFragment(R.layout.fragment_check_memory) {
         val ss = SpannableString(tvCheckMemory.text)
         ss.clearSpans()
         ss.setSpan(
-            BackgroundColorSpan(Color.BLUE),
+            BackgroundColorSpan(Color.parseColor("#9E0046BE")),
             interval.first,
             interval.second,
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
