@@ -49,12 +49,19 @@
     <string name="enter_name">Enter name</string>
     <string name="save_success">Save success</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="delete">Delete</string>
     <string name="delete_paint">Delete paint?</string>
     <string name="yes">Yes</string>
     <string name="cancel">Cancel</string>
     <string name="delete_success">Deleted</string>
+    <string name="not_have_diaries">Not have diaries</string>
+    <string name="title">Title</string>
+    <string name="text">Text</string>
+    <string name="enter_title">Enter title</string>
+    <string name="enter_text">Enter text</string>
+    <string name="diary_created">Diary saved!</string>
+    <string name="delete_diary">Delete diary</string>
+    <string name="error">Error</string>
 
 </resources>

@@ -68,4 +68,26 @@
             android:name="urlImage"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_diary"
+        android:name="com.learn.easy.ui.diary.list.DiaryFragment"
+        android:label="Diary"
+        tools:layout="@layout/fragment_diary" >
+        <action
+            android:id="@+id/action_diaryFragment_to_addDiary"
+            app:destination="@id/addDiary" />
+        <action
+            android:id="@+id/action_diaryFragment_to_openDiaryFragment"
+            app:destination="@id/openDiaryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addDiary"
+        android:name="com.learn.easy.ui.diary.add.AddDiaryFragment"
+        android:label="Add diary"
+        tools:layout="@layout/fragment_add_diary" />
+    <fragment
+        android:id="@+id/openDiaryFragment"
+        android:name="com.learn.easy.ui.diary.open.OpenDiaryFragment"
+        android:label="Diary"
+        tools:layout="@layout/fragment_open_diary" />
 </navigation>
