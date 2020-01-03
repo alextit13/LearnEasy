@@ -37,9 +37,13 @@
 
     <fragment
         android:id="@+id/nav_cards"
-        android:name="com.learn.easy.ui.cards.CardsFragment"
+        android:name="com.learn.easy.ui.cards.list.CardsFragment"
         android:label="@string/menu_cards"
-        tools:layout="@layout/fragment_cards" />
+        tools:layout="@layout/fragment_cards" >
+        <action
+            android:id="@+id/action_nav_cards_to_addCardFragment"
+            app:destination="@id/addCardFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_canvas"
@@ -112,4 +116,9 @@
         android:name="com.learn.easy.ui.video_note.show.ShowNoteFragment"
         android:label="Video note"
         tools:layout="@layout/fragment_show_note" />
+    <fragment
+        android:id="@+id/addCardFragment"
+        android:name="com.learn.easy.ui.cards.add.AddCardFragment"
+        android:label="Add card"
+        tools:layout="@layout/fragment_add_card" />
 </navigation>

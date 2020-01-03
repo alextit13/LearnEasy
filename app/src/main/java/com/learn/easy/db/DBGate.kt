@@ -2,6 +2,7 @@ package com.learn.easy.db
 
 import android.content.ContentValues
 import android.content.Context
+import com.learn.easy.utils.Card
 import com.learn.easy.utils.Diary
 import com.learn.easy.utils.Paint
 import com.learn.easy.utils.VideoNote
@@ -183,6 +184,66 @@ class DBGate(private val context: Context) {
     fun deleteVideoNote(note: VideoNote): Boolean {
         return DBHelperVideoNotes.newInstance(context).writableDatabase
             .delete("videoNotes", "id=?", arrayOf(note.id)) > 0
+    }
+
+    fun getAllCards(): MutableList<Card> {
+        val list = mutableListOf<Card>()
+        val dbHelper = DBHelperCards.newInstance(context)
+        val db = dbHelper.writableDatabase
+
+        val c = db.query(
+            "cards", null, null, null,
+            null, null, null
+        )
+        if (c.moveToFirst()) {
+            val idColIndex = c.getColumnIndex("id")
+            val titleColIndex = c.getColumnIndex("title")
+            val descriptionColIndex = c.getColumnIndex("description")
+            val imagePathColIndex = c.getColumnIndex("imagePath")
+
+            val audioPathColIndex = c.getColumnIndex("audioPath")
+            val videoPathColIndex = c.getColumnIndex("videoPath")
+
+            do {
+                val id = c.getString(idColIndex)
+                val title = c.getString(titleColIndex)
+                val description = c.getString(descriptionColIndex)
+                val imagePath = c.getString(imagePathColIndex)
+
+                val audioPath = c.getString(audioPathColIndex)
+                val videoPath = c.getString(videoPathColIndex)
+
+                val card = Card(
+                    id, title, description, imagePath, audioPath, videoPath
+                )
+
+                list.add(card)
+            } while (c.moveToNext())
+        }
+        c.close()
+        return list
+    }
+
+    fun insertCard(card: Card) {
+        val cv = ContentValues()
+        val dbHelper = DBHelperCards.newInstance(context)
+        val db = dbHelper.writableDatabase
+
+        cv.put("id", card.id)
+        cv.put("title", card.title)
+        cv.put("description", card.description)
+        cv.put("imagePath", card.imagePath)
+
+        cv.put("audioPath", card.audioPath)
+        cv.put("videoPath", card.videoPath)
+
+        db.insert("cards", null, cv)
+        dbHelper.close()
+    }
+
+    fun deleteCard(card: Card): Boolean {
+        return DBHelperCards.newInstance(context).writableDatabase
+            .delete("cards", "id=?", arrayOf(card.id)) > 0
     }
 
     companion object {
