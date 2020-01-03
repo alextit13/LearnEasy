@@ -90,4 +90,26 @@
         android:name="com.learn.easy.ui.diary.open.OpenDiaryFragment"
         android:label="Diary"
         tools:layout="@layout/fragment_open_diary" />
+    <fragment
+        android:id="@+id/nav_video_notes"
+        android:name="com.learn.easy.ui.video_note.VideoNoteFragment"
+        android:label="Video notes"
+        tools:layout="@layout/fragment_video_note" >
+        <action
+            android:id="@+id/action_nav_video_notes_to_addVideoNoteFragment"
+            app:destination="@id/addVideoNoteFragment" />
+        <action
+            android:id="@+id/action_nav_video_notes_to_showNoteFragment"
+            app:destination="@id/showNoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addVideoNoteFragment"
+        android:name="com.learn.easy.ui.video_note.add.AddVideoNoteFragment"
+        android:label="Add note"
+        tools:layout="@layout/fragment_add_video_note" />
+    <fragment
+        android:id="@+id/showNoteFragment"
+        android:name="com.learn.easy.ui.video_note.show.ShowNoteFragment"
+        android:label="Video note"
+        tools:layout="@layout/fragment_show_note" />
 </navigation>

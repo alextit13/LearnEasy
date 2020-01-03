@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import com.learn.easy.utils.Diary
 import com.learn.easy.utils.Paint
+import com.learn.easy.utils.VideoNote
 
 class DBGate(private val context: Context) {
 
@@ -128,6 +129,60 @@ class DBGate(private val context: Context) {
     fun deleteDiary(id: Int): Boolean {
         return DBHelperDiary.newInstance(context).writableDatabase
             .delete("diary", "id=?", arrayOf(id.toString())) > 0
+    }
+
+    fun getVideoNotes(): MutableList<VideoNote> {
+        val list = mutableListOf<VideoNote>()
+        val dbHelper = DBHelperVideoNotes.newInstance(context)
+        val db = dbHelper.writableDatabase
+
+        val c = db.query(
+            "videoNotes", null, null, null,
+            null, null, null
+        )
+        if (c.moveToFirst()) {
+            val idColIndex = c.getColumnIndex("id")
+            val titleColIndex = c.getColumnIndex("title")
+            val subTitleColIndex = c.getColumnIndex("subtitle")
+            val firstCharColIndex = c.getColumnIndex("firstChar")
+            val pathVideoColIndex = c.getColumnIndex("pathVideo")
+
+            do {
+                val id = c.getString(idColIndex)
+                val title = c.getString(titleColIndex)
+                val subtitle = c.getString(subTitleColIndex)
+                val firstChar = c.getString(firstCharColIndex)
+                val pathVideo = c.getString(pathVideoColIndex)
+
+                val videoNote = VideoNote(
+                    id, title, subtitle, firstChar, pathVideo
+                )
+
+                list.add(videoNote)
+            } while (c.moveToNext())
+        }
+        c.close()
+        return list
+    }
+
+    fun insertVideoNote(note: VideoNote) {
+        val cv = ContentValues()
+        val dbHelper = DBHelperVideoNotes.newInstance(context)
+        val db = dbHelper.writableDatabase
+
+        cv.put("id", note.id)
+        cv.put("title", note.title)
+        cv.put("subtitle", note.subtitle)
+        cv.put("firstChar", note.firstChar)
+        cv.put("pathVideo", note.pathVideo)
+
+        db.insert("videoNotes", null, cv)
+        dbHelper.close()
+    }
+
+    fun deleteVideoNote(note: VideoNote): Boolean {
+        return DBHelperDiary.newInstance(context).writableDatabase
+            .delete("videoNotes", "id=?", arrayOf(note.id)) > 0
     }
 
     companion object {

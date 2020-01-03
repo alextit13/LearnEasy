@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.video_note.add.AddVideoNoteFragment">
+
+    <EditText
+        android:id="@+id/etTitleVideoNotes"
+        android:layout_margin="@dimen/margin_default"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/title" />
+
+    <View
+        android:id="@+id/viewDivider"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvRecordVideo"
+        app:cardCornerRadius="35dp"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:padding="12dp"
+            android:src="@drawable/icon_video_notes"
+            android:layout_width="75dp"
+            android:layout_height="75dp"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_marginTop="12dp"
+        android:text="@string/record_video"
+        android:layout_below="@id/cvRecordVideo"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@id/viewDivider"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:text="@string/cancel" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:layout_toEndOf="@id/viewDivider"
+        android:text="@string/save" />
+
+</RelativeLayout>
