@@ -1,14 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.cards.add.AddCardFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvCard"
+            app:cardCornerRadius="12dp"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_default"
+            android:layout_width="300dp"
+            android:layout_height="300dp">
+
+            <ImageView
+                android:src="@drawable/back_card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/etTitle"
+                    android:layout_margin="@dimen/margin_default"
+                    android:hint="@string/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:id="@+id/etDescription"
+                    android:layout_margin="@dimen/margin_default"
+                    android:hint="@string/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:padding="@dimen/margin_default"
+            android:background="@color/colorAccent"
+            android:drawableEnd="@drawable/icon_video_notes"
+            android:drawablePadding="@dimen/margin_default"
+            android:text="@string/record_video"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:padding="@dimen/margin_default"
+            android:background="@color/colorAccent"
+            android:drawableEnd="@drawable/ic_audio"
+            android:drawablePadding="@dimen/margin_default"
+            android:text="@string/record_audio"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+</ScrollView>
