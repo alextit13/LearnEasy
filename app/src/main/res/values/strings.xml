@@ -66,5 +66,6 @@
     <string name="enter_data">Enter title and record a video</string>
     <string name="record_video">Record video</string>
     <string name="video_was_recorded">Video recorded!</string>
+    <string name="delete_video_note">Delete video note?</string>
 
 </resources>

@@ -13,8 +13,9 @@ import kotlinx.android.synthetic.main.item_video_note.view.*
 import java.util.*
 
 class VideoNoteAdapter(
-    private val notes: MutableList<VideoNote>,
-    private val callback: (VideoNote) -> Unit
+    var notes: MutableList<VideoNote>,
+    private val callback: (VideoNote) -> Unit,
+    private val longClick: (VideoNote) -> Unit
 ) : RecyclerView.Adapter<VideoNoteAdapter.Holder>() {
 
     override fun getItemCount(): Int = notes.size
@@ -35,6 +36,10 @@ class VideoNoteAdapter(
             subtitle.text = n.subtitle
 
             itemView.setOnClickListener { callback.invoke(n) }
+            itemView.setOnLongClickListener {
+                longClick.invoke(n)
+                true
+            }
         }
     }
 

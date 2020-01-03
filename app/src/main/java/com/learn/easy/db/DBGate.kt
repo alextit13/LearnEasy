@@ -181,7 +181,7 @@ class DBGate(private val context: Context) {
     }
 
     fun deleteVideoNote(note: VideoNote): Boolean {
-        return DBHelperDiary.newInstance(context).writableDatabase
+        return DBHelperVideoNotes.newInstance(context).writableDatabase
             .delete("videoNotes", "id=?", arrayOf(note.id)) > 0
     }
 
