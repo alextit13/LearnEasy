@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.learn.easy.R
 import com.learn.easy.ui.cards.show.ShowCardFragment.Companion.TAG_CARD
 import com.learn.easy.utils.Card
@@ -96,6 +97,7 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
         } else {
             adapter?.items = notes
         }
+        rvCards.layoutManager = GridLayoutManager(context, 2)
         rvCards.adapter = adapter
     }
 }

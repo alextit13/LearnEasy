@@ -14,7 +14,7 @@ class DBHelperPaints(context: Context) : SQLiteOpenHelper(
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(
             "create table paints ("
-                    + "date integer primary key autoincrement,"
+                    + "id integer primary key autoincrement,"
                     + "name text,"
                     + "imagePath text" + ");"
         );

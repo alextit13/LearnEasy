@@ -42,6 +42,7 @@ class CardsViewModel(
 
     fun onClickDelete(card: Card) {
         DBGate.newInstance(app).deleteCard(card)
+        getAllNotes()
         toast.value = SingleEvent(app.getString(R.string.delete_success))
     }
 }

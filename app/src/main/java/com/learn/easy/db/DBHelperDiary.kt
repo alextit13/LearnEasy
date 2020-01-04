@@ -14,7 +14,7 @@ class DBHelperDiary(context: Context) : SQLiteOpenHelper(
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(
             "create table diary ("
-                    + "date integer primary key autoincrement,"
+                    + "id integer primary key autoincrement,"
                     + "date text,"
                     + "title text,"
                     + "text text" + ");"
@@ -25,6 +25,7 @@ class DBHelperDiary(context: Context) : SQLiteOpenHelper(
 
     companion object {
         const val DB_NAME = "db_app_learn_easy_diary"
+        private var instance: DBHelperDiary? = null
         @JvmStatic
         fun newInstance(context: Context) = DBHelperDiary(context)
     }

@@ -6,6 +6,8 @@
 
     <ScrollView
         android:id="@+id/svWordRunningTop"
+        android:clickable="false"
+        android:focusable="false"
         android:descendantFocusability="blocksDescendants"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -16,6 +18,8 @@
             android:gravity="center|top"
             android:textSize="28sp"
             android:scrollbars="vertical"
+            android:clickable="false"
+            android:focusable="false"
             android:padding="@dimen/margin_default"
             tools:text="Test some string"
             android:layout_width="match_parent"

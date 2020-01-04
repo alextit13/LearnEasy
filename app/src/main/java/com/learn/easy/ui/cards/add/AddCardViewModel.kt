@@ -52,11 +52,10 @@ class AddCardViewModel(private val app: Application) : AndroidViewModel(app) {
     }
 
     fun onClickAddImage() {
-        imageName = "images_cards/${Date().time}.jpg"
+        imageName = "${Date().time}.jpg"
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        val uri  =Uri.fromFile(File(Environment.getExternalStoragePublicDirectory(
-            Environment.DIRECTORY_PICTURES
-        ), imageName))
+        val uri  =Uri.fromFile(File(Environment.getExternalStorageDirectory().path, imageName))
+        // val uri  = Uri.parse("file:///sdcard/photo$imageName")
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
         image.value = SingleEvent(intent)
     }

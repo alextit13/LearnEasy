@@ -8,12 +8,15 @@ import com.learn.easy.R
 import com.learn.easy.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_word_running_top.*
 import kotlinx.coroutines.*
+import java.lang.Exception
 
 class WordRunningTopFragment : BaseFragment(R.layout.fragment_word_running_top) {
 
     private val viewModel: WordRunningTopViewModel by lazy {
         ViewModelProviders.of(this).get(WordRunningTopViewModel::class.java)
     }
+
+    private var isRunning = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,9 +35,14 @@ class WordRunningTopFragment : BaseFragment(R.layout.fragment_word_running_top) 
     private fun runScroller() {
         var scrollPosition = 0
         GlobalScope.launch {
-            while (true) {
+            while (isRunning) {
                 withContext(Dispatchers.Main) {
-                    svWordRunningTop.smoothScrollTo(0, scrollPosition)
+                    try {
+                        svWordRunningTop.smoothScrollTo(0, scrollPosition)
+                    } catch (e: Exception) {
+                        println("LOG_TAG: current fragment was closed")
+                        isRunning = false
+                    }
                 }
                 delay(10)
                 scrollPosition++
