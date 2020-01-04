@@ -25,7 +25,7 @@ class OpenDiaryFragment : Fragment(R.layout.fragment_open_diary) {
     }
 
     private fun getDiaryIdFromBundle() {
-        val id = arguments?.getInt("id") ?: 0
+        val id = arguments?.getInt("date") ?: 0
         viewModel.viewWasCreated(id)
     }
 

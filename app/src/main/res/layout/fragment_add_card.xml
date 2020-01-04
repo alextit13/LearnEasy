@@ -49,6 +49,7 @@
         </androidx.cardview.widget.CardView>
 
         <Button
+            android:id="@+id/btnAddVideoRecord"
             android:padding="@dimen/margin_default"
             android:background="@color/colorAccent"
             android:drawableEnd="@drawable/icon_video_notes"
@@ -59,6 +60,7 @@
             android:layout_height="wrap_content"/>
 
         <Button
+            android:id="@+id/btnAudioRecord"
             android:padding="@dimen/margin_default"
             android:background="@color/colorAccent"
             android:drawableEnd="@drawable/ic_audio"
@@ -69,8 +71,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+        <Button
+            android:id="@+id/btnAddImage"
+            android:padding="@dimen/margin_default"
+            android:background="@color/colorAccent"
+            android:drawableEnd="@drawable/ic_image"
+            android:drawablePadding="@dimen/margin_default"
+            android:text="@string/add_image"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:padding="@dimen/margin_default"
+                android:text="@string/cancel"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btnSave"
+                android:padding="@dimen/margin_default"
+                android:text="@string/save"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
     </LinearLayout>
-
 
 </ScrollView>

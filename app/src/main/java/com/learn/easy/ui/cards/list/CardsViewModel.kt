@@ -18,6 +18,8 @@ class CardsViewModel(
     val toast = MutableLiveData<SingleEvent<String>>()
     val showDeleteDialog = MutableLiveData<SingleEvent<Card>>()
 
+    val openCard = MutableLiveData<SingleEvent<Card>>()
+
     fun viewWasInit() {
         getAllNotes()
     }
@@ -27,7 +29,7 @@ class CardsViewModel(
     }
 
     fun onClickCard(card: Card) {
-        // todo this
+        openCard.value = SingleEvent(card)
     }
 
     fun onLongClickCard(card: Card) {

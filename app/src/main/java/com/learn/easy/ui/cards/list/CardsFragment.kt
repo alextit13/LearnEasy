@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.learn.easy.R
+import com.learn.easy.ui.cards.show.ShowCardFragment.Companion.TAG_CARD
 import com.learn.easy.utils.Card
 import kotlinx.android.synthetic.main.fragment_cards.*
 
@@ -46,8 +47,20 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
                     Toast.makeText(context, it.content(), Toast.LENGTH_LONG).show()
                 }
             })
+            openCard.observe(this@CardsFragment, Observer {
+                if (it.getContentIfNotHandled() != null) {
+                    openCardItem(it.content())
+                }
+            })
             viewWasInit()
         }
+    }
+
+    private fun openCardItem(card: Card) {
+        findNavController().navigate(R.id.action_nav_cards_to_showCardFragment,
+            Bundle().apply {
+                putSerializable(TAG_CARD, card)
+            })
     }
 
     private fun showDeleteDialog(card: Card) {

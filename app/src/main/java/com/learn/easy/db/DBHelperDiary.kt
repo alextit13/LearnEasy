@@ -14,7 +14,7 @@ class DBHelperDiary(context: Context) : SQLiteOpenHelper(
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(
             "create table diary ("
-                    + "id integer primary key autoincrement,"
+                    + "date integer primary key autoincrement,"
                     + "date text,"
                     + "title text,"
                     + "text text" + ");"

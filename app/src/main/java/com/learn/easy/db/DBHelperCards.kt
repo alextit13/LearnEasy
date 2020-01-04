@@ -17,7 +17,10 @@ class DBHelperCards(context: Context) : SQLiteOpenHelper(
                     + "id integer primary key autoincrement,"
                     + "date text,"
                     + "title text,"
-                    + "text text" + ");"
+                    + "description text,"
+                    + "imagePath text,"
+                    + "audioPath text,"
+                    + "videoPath text" + ");"
         );
     }
 

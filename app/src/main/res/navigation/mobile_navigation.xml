@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_nav_cards_to_addCardFragment"
             app:destination="@id/addCardFragment" />
+        <action
+            android:id="@+id/action_nav_cards_to_showCardFragment"
+            app:destination="@id/showCardFragment" />
     </fragment>
 
     <fragment
@@ -121,4 +124,9 @@
         android:name="com.learn.easy.ui.cards.add.AddCardFragment"
         android:label="Add card"
         tools:layout="@layout/fragment_add_card" />
+    <fragment
+        android:id="@+id/showCardFragment"
+        android:name="com.learn.easy.ui.cards.show.ShowCardFragment"
+        android:label="Card"
+        tools:layout="@layout/fragment_show_card" />
 </navigation>

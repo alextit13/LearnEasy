@@ -10,16 +10,11 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
 public class PathCalculator {
-    public static String getPath(final Context context, String string) {
-        return getPath(context, Uri.parse(string));
-    }
 
     public static String getPath(final Context context, final Uri uri) {
 
-        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
-
         // DocumentProvider
-        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+        if (DocumentsContract.isDocumentUri(context, uri)) {
             // ExternalStorageProvider
             if (isExternalStorageDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);
@@ -76,16 +71,6 @@ public class PathCalculator {
         return null;
     }
 
-    /**
-     * Get the value of the data column for this Uri. This is useful for
-     * MediaStore Uris, and other file-based ContentProviders.
-     *
-     * @param context The context.
-     * @param uri The Uri to query.
-     * @param selection (Optional) Filter used in the query.
-     * @param selectionArgs (Optional) Selection arguments used in the query.
-     * @return The value of the _data column, which is typically a file path.
-     */
     public static String getDataColumn(Context context, Uri uri, String selection,
                                        String[] selectionArgs) {
 
@@ -109,11 +94,6 @@ public class PathCalculator {
         return null;
     }
 
-
-    /**
-     * @param uri The Uri to check.
-     * @return Whether the Uri authority is ExternalStorageProvider.
-     */
     public static boolean isExternalStorageDocument(Uri uri) {
         return "com.android.externalstorage.documents".equals(uri.getAuthority());
     }

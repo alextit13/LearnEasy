@@ -70,5 +70,10 @@
     <string name="delete_card">Delete card?</string>
     <string name="description">Description</string>
     <string name="record_audio">Record audio</string>
+    <string name="add_image">Make photo</string>
+    <string name="audio_was_recorded">Audio was recorded!</string>
+    <string name="image_take_success">Take image success!</string>
+    <string name="enter_text_and_description">Enter title and description</string>
+    <string name="audio">Audio</string>
 
 </resources>

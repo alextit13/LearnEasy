@@ -57,7 +57,7 @@ class DBGate(private val context: Context) {
         val dbHelper = DBHelperDiary.newInstance(context)
         val db = dbHelper.writableDatabase
 
-        cv.put("id", diary.id)
+        cv.put("date", diary.id)
         cv.put("date", diary.date)
         cv.put("title", diary.title)
         cv.put("text", diary.text)
@@ -76,7 +76,7 @@ class DBGate(private val context: Context) {
             null, null, null
         )
         if (c.moveToFirst()) {
-            val idColIndex = c.getColumnIndex("id")
+            val idColIndex = c.getColumnIndex("date")
             val dateColIndex = c.getColumnIndex("date")
             val titleColIndex = c.getColumnIndex("title")
             val textColIndex = c.getColumnIndex("text")
@@ -97,7 +97,7 @@ class DBGate(private val context: Context) {
     }
 
     fun getDiary(id: Int): Diary? {
-        val selectQuery = "SELECT * FROM diary WHERE id = $id"
+        val selectQuery = "SELECT * FROM diary WHERE date = $id"
         val db = DBHelperDiary.newInstance(context).writableDatabase
         val c = db.rawQuery(selectQuery, null)
 
@@ -119,17 +119,17 @@ class DBGate(private val context: Context) {
 
     fun updateDiary(diary: Diary) {
         val cv = ContentValues()
-        cv.put("id", diary.id)
+        cv.put("date", diary.id)
         cv.put("title", diary.title)
         cv.put("text", diary.text)
         cv.put("date", diary.date)
         val db = DBHelperDiary.newInstance(context).writableDatabase
-        db.update("diary", cv, "id = ${diary.id}", null)
+        db.update("diary", cv, "date = ${diary.id}", null)
     }
 
     fun deleteDiary(id: Int): Boolean {
         return DBHelperDiary.newInstance(context).writableDatabase
-            .delete("diary", "id=?", arrayOf(id.toString())) > 0
+            .delete("diary", "date=?", arrayOf(id.toString())) > 0
     }
 
     fun getVideoNotes(): MutableList<VideoNote> {
@@ -142,7 +142,7 @@ class DBGate(private val context: Context) {
             null, null, null
         )
         if (c.moveToFirst()) {
-            val idColIndex = c.getColumnIndex("id")
+            val idColIndex = c.getColumnIndex("date")
             val titleColIndex = c.getColumnIndex("title")
             val subTitleColIndex = c.getColumnIndex("subtitle")
             val firstCharColIndex = c.getColumnIndex("firstChar")
@@ -171,7 +171,7 @@ class DBGate(private val context: Context) {
         val dbHelper = DBHelperVideoNotes.newInstance(context)
         val db = dbHelper.writableDatabase
 
-        cv.put("id", note.id)
+        cv.put("date", note.id)
         cv.put("title", note.title)
         cv.put("subtitle", note.subtitle)
         cv.put("firstChar", note.firstChar)
@@ -183,7 +183,7 @@ class DBGate(private val context: Context) {
 
     fun deleteVideoNote(note: VideoNote): Boolean {
         return DBHelperVideoNotes.newInstance(context).writableDatabase
-            .delete("videoNotes", "id=?", arrayOf(note.id)) > 0
+            .delete("videoNotes", "date=?", arrayOf(note.id)) > 0
     }
 
     fun getAllCards(): MutableList<Card> {
@@ -196,7 +196,7 @@ class DBGate(private val context: Context) {
             null, null, null
         )
         if (c.moveToFirst()) {
-            val idColIndex = c.getColumnIndex("id")
+            val idColIndex = c.getColumnIndex("date")
             val titleColIndex = c.getColumnIndex("title")
             val descriptionColIndex = c.getColumnIndex("description")
             val imagePathColIndex = c.getColumnIndex("imagePath")
@@ -229,7 +229,7 @@ class DBGate(private val context: Context) {
         val dbHelper = DBHelperCards.newInstance(context)
         val db = dbHelper.writableDatabase
 
-        cv.put("id", card.id)
+        cv.put("date", card.date)
         cv.put("title", card.title)
         cv.put("description", card.description)
         cv.put("imagePath", card.imagePath)
@@ -243,7 +243,7 @@ class DBGate(private val context: Context) {
 
     fun deleteCard(card: Card): Boolean {
         return DBHelperCards.newInstance(context).writableDatabase
-            .delete("cards", "id=?", arrayOf(card.id)) > 0
+            .delete("cards", "date=?", arrayOf(card.date)) > 0
     }
 
     companion object {

@@ -10,6 +10,7 @@ import com.learn.easy.R
 import com.learn.easy.utils.Card
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_card.view.*
+import java.io.File
 
 class CardAdapter(
     var items: MutableList<Card>,
@@ -27,7 +28,10 @@ class CardAdapter(
         holder.apply {
 
             title.text = c.title
-            Picasso.get().load(c.imagePath).into(image)
+            val imagePath = c.imagePath
+            if (imagePath.isNotEmpty()) {
+                Picasso.get().load(File(imagePath)).into(image)
+            }
 
             itemView.setOnClickListener { callback.invoke(c) }
             itemView.setOnLongClickListener {

@@ -46,12 +46,18 @@ class BaseHostActivity : AppCompatActivity() {
                 this,
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE
             )
+            != PackageManager.PERMISSION_GRANTED ||
+            ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.CAMERA
+            )
             != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    android.Manifest.permission.CAMERA),
                 1
             )
         }

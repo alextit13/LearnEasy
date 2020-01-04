@@ -61,7 +61,7 @@ class DiaryFragment : Fragment(R.layout.fragment_diary) {
         findNavController().navigate(
             R.id.action_diaryFragment_to_openDiaryFragment,
             Bundle().apply {
-                putInt("id", id)
+                putInt("date", id)
             })
     }
 
