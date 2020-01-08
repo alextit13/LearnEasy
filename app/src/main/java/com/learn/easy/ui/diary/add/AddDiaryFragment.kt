@@ -26,10 +26,10 @@ class AddDiaryFragment : Fragment(R.layout.fragment_add_diary) {
     }
 
     private fun checkEditOrCreate() {
-        val id = arguments?.getInt("id_diary")
-        if (id != null) {
+        val date = arguments?.getString("date_diary")
+        if (date != null) {
             // edit
-            viewModel.openForEdit(id)
+            viewModel.openForEdit(date)
         }
     }
 

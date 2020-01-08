@@ -14,7 +14,7 @@ class DBHelperVideoNotes(context: Context) : SQLiteOpenHelper(
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(
             "create table videoNotes ("
-                    + "id text,"
+                    + "date text,"
                     + "title text,"
                     + "subtitle text,"
                     + "firstChar text,"

@@ -10,9 +10,9 @@ class OpenDiaryViewModel(private val app: Application) : AndroidViewModel(app) {
 
     val diaryLd = MutableLiveData<Diary>()
 
-    fun viewWasCreated(idDiary: Int) {
+    fun viewWasCreated(dateDiary: String) {
         val diary = DBGate.newInstance(app.applicationContext)
-            .getDiary(idDiary)
+            .getDiary(dateDiary)
 
         diaryLd.value = diary
     }

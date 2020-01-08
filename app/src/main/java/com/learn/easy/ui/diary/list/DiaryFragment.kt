@@ -17,6 +17,7 @@ class DiaryFragment : Fragment(R.layout.fragment_diary) {
     private val viewModel: DiaryViewModel by lazy {
         ViewModelProviders.of(this)[DiaryViewModel::class.java]
     }
+    private var adapter: DiaryAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,25 +58,30 @@ class DiaryFragment : Fragment(R.layout.fragment_diary) {
         findNavController().navigate(R.id.action_diaryFragment_to_addDiary, bundle)
     }
 
-    private fun openDiaryFragment(id: Int) {
+    private fun openDiaryFragment(date: String) {
         findNavController().navigate(
             R.id.action_diaryFragment_to_openDiaryFragment,
             Bundle().apply {
-                putInt("date", id)
+                putString("date_diary", date)
             })
     }
 
     private fun initAdapter(diaries: MutableList<Diary>) {
-        rvDiary.adapter = DiaryAdapter(diaries, {
-            viewModel.onClickDiary(it)
-        }, {
-            showDeleteDialog(it)
-        },
-            {
-                openAddDiaryFragment(Bundle().apply {
-                    putInt("id_diary", it.id)
+        if (adapter == null) {
+            adapter = DiaryAdapter(diaries, {
+                viewModel.onClickDiary(it)
+            }, {
+                showDeleteDialog(it)
+            },
+                {
+                    openAddDiaryFragment(Bundle().apply {
+                        putString("date_diary", it.date)
+                    })
                 })
-            })
+        } else {
+            adapter?.diaries = diaries
+        }
+        rvDiary.adapter = adapter
     }
 
     private fun showDeleteDialog(diary: Diary) {

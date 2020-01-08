@@ -3,14 +3,14 @@ package com.learn.easy.ui.diary.add
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.learn.easy.BaseViewModel
 import com.learn.easy.R
 import com.learn.easy.db.DBGate
 import com.learn.easy.utils.Diary
 import com.learn.easy.utils.SingleEvent
 import java.util.*
-import kotlin.random.Random
 
-class AddDiaryViewModel(private val app: Application) : AndroidViewModel(app) {
+class AddDiaryViewModel(app: Application) : BaseViewModel(app) {
 
     val toast = MutableLiveData<SingleEvent<String>>()
     val exit = MutableLiveData<SingleEvent<Boolean>>()
@@ -33,7 +33,6 @@ class AddDiaryViewModel(private val app: Application) : AndroidViewModel(app) {
 
         if (!isEdit) {
             diary = Diary(
-                Random.nextInt(),
                 Date().time.toString(),
                 title,
                 text
@@ -42,9 +41,13 @@ class AddDiaryViewModel(private val app: Application) : AndroidViewModel(app) {
         } else {
             diary?.apply {
                 this.title = title
-                this.date = Date().time.toString()
                 this.text = text
-            }?.let { DBGate.newInstance(app.applicationContext).updateDiary(it) }
+            }?.let {
+                val result = DBGate.newInstance(app.applicationContext).updateDiary(it)
+                if (result < 1) {
+                    showToast(app.getString(R.string.error))
+                }
+            }
         }
 
 
@@ -53,9 +56,9 @@ class AddDiaryViewModel(private val app: Application) : AndroidViewModel(app) {
         isEdit = false
     }
 
-    fun openForEdit(id: Int) {
+    fun openForEdit(date: String) {
         isEdit = true
-        diary = DBGate.newInstance(app).getDiary(id)
+        diary = DBGate.newInstance(app).getDiary(date)
         if (diary != null) {
             diaryEdit.value = SingleEvent(diary!!)
         }

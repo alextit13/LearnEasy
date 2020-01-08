@@ -25,13 +25,14 @@ class OpenDiaryFragment : Fragment(R.layout.fragment_open_diary) {
     }
 
     private fun getDiaryIdFromBundle() {
-        val id = arguments?.getInt("date") ?: 0
-        viewModel.viewWasCreated(id)
+        val date = arguments?.getString("date_diary") ?: ""
+        viewModel.viewWasCreated(date)
     }
 
     private fun observables() {
         viewModel.diaryLd.observe(this, Observer {
-            setDataInViews(it)
+            if (it != null)
+                setDataInViews(it)
         })
     }
 

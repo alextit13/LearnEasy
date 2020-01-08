@@ -14,7 +14,7 @@ class DiaryViewModel(
 
     val toast = MutableLiveData<SingleEvent<String>>()
     val diariesLd = MutableLiveData<MutableList<Diary>>()
-    val openDiary = MutableLiveData<SingleEvent<Int>>()
+    val openDiary = MutableLiveData<SingleEvent<String>>()
     val addDiary = MutableLiveData<SingleEvent<Boolean>>()
 
     fun viewWasInit() {
@@ -25,9 +25,8 @@ class DiaryViewModel(
         val diaries = DBGate.newInstance(app.applicationContext)
             .getAllDiaries()
 
-        if (diaries.isNotEmpty()) {
-            diariesLd.value = diaries
-        } else {
+        diariesLd.value = diaries
+        if (diaries.isEmpty()) {
             toast.value = SingleEvent(app.getString(R.string.not_have_diaries))
         }
     }
@@ -37,11 +36,11 @@ class DiaryViewModel(
     }
 
     fun onClickDiary(diary: Diary) {
-        openDiary.value = SingleEvent(diary.id)
+        openDiary.value = SingleEvent(diary.date)
     }
 
     fun onClickDelete(diary: Diary) {
-        if (DBGate.newInstance(app).deleteDiary(diary.id))
+        if (DBGate.newInstance(app).deleteDiary(diary.date))
             toast.value = SingleEvent(app.getString(R.string.delete_success))
         else
             toast.value = SingleEvent(app.getString(R.string.error))

@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class DiaryAdapter(
-    private val diaries: MutableList<Diary>,
+    var diaries: MutableList<Diary>,
     private val callback: (Diary) -> Unit,
     private val longClick: (Diary) -> Unit,
     private val editClick: (Diary) -> Unit

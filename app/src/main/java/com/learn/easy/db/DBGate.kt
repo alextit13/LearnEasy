@@ -57,7 +57,6 @@ class DBGate(private val context: Context) {
         val dbHelper = DBHelperDiary.newInstance(context)
         val db = dbHelper.writableDatabase
 
-        cv.put("date", diary.id)
         cv.put("date", diary.date)
         cv.put("title", diary.title)
         cv.put("text", diary.text)
@@ -87,7 +86,7 @@ class DBGate(private val context: Context) {
                 val title = c.getString(titleColIndex)
                 val text = c.getString(textColIndex)
 
-                val diary = Diary(id, date, title, text)
+                val diary = Diary(date, title, text)
 
                 list.add(diary)
             } while (c.moveToNext())
@@ -96,8 +95,8 @@ class DBGate(private val context: Context) {
         return list
     }
 
-    fun getDiary(id: Int): Diary? {
-        val selectQuery = "SELECT * FROM diary WHERE date = $id"
+    fun getDiary(date: String): Diary? {
+        val selectQuery = "SELECT * FROM diary WHERE date = $date"
         val db = DBHelperDiary.newInstance(context).writableDatabase
         val c = db.rawQuery(selectQuery, null)
 
@@ -106,30 +105,29 @@ class DBGate(private val context: Context) {
             val titleColIndex = c.getColumnIndex("title")
             val textColIndex = c.getColumnIndex("text")
 
-            val date = c.getString(dateColIndex)
+            val dateS = c.getString(dateColIndex)
             val title = c.getString(titleColIndex)
             val text = c.getString(textColIndex)
 
             c.close()
-            return Diary(id, date, title, text)
+            return Diary(dateS, title, text)
         }
 
         return null
     }
 
-    fun updateDiary(diary: Diary) {
+    fun updateDiary(diary: Diary): Int {
         val cv = ContentValues()
-        cv.put("date", diary.id)
+        cv.put("date", diary.date)
         cv.put("title", diary.title)
         cv.put("text", diary.text)
-        cv.put("date", diary.date)
         val db = DBHelperDiary.newInstance(context).writableDatabase
-        db.update("diary", cv, "date = ${diary.id}", null)
+        return db.update("diary", cv, "date=?", arrayOf(diary.date))
     }
 
-    fun deleteDiary(id: Int): Boolean {
+    fun deleteDiary(date: String): Boolean {
         return DBHelperDiary.newInstance(context).writableDatabase
-            .delete("diary", "date=?", arrayOf(id.toString())) > 0
+            .delete("diary", "date=?", arrayOf(date)) > 0
     }
 
     fun getVideoNotes(): MutableList<VideoNote> {
@@ -142,21 +140,21 @@ class DBGate(private val context: Context) {
             null, null, null
         )
         if (c.moveToFirst()) {
-            val idColIndex = c.getColumnIndex("date")
+            val dateColIndex = c.getColumnIndex("date")
             val titleColIndex = c.getColumnIndex("title")
             val subTitleColIndex = c.getColumnIndex("subtitle")
             val firstCharColIndex = c.getColumnIndex("firstChar")
             val pathVideoColIndex = c.getColumnIndex("pathVideo")
 
             do {
-                val id = c.getString(idColIndex)
+                val date = c.getString(dateColIndex)
                 val title = c.getString(titleColIndex)
                 val subtitle = c.getString(subTitleColIndex)
                 val firstChar = c.getString(firstCharColIndex)
                 val pathVideo = c.getString(pathVideoColIndex)
 
                 val videoNote = VideoNote(
-                    id, title, subtitle, firstChar, pathVideo
+                    date, title, subtitle, firstChar, pathVideo
                 )
 
                 list.add(videoNote)
@@ -171,19 +169,19 @@ class DBGate(private val context: Context) {
         val dbHelper = DBHelperVideoNotes.newInstance(context)
         val db = dbHelper.writableDatabase
 
-        cv.put("date", note.id)
+        cv.put("date", note.date)
         cv.put("title", note.title)
         cv.put("subtitle", note.subtitle)
         cv.put("firstChar", note.firstChar)
         cv.put("pathVideo", note.pathVideo)
 
-        db.insert("videoNotes", null, cv)
+        val result = db.insert("videoNotes", null, cv)
         dbHelper.close()
     }
 
     fun deleteVideoNote(note: VideoNote): Boolean {
         return DBHelperVideoNotes.newInstance(context).writableDatabase
-            .delete("videoNotes", "date=?", arrayOf(note.id)) > 0
+            .delete("videoNotes", "date=?", arrayOf(note.date)) > 0
     }
 
     fun getAllCards(): MutableList<Card> {
