@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.learn.easy.R
@@ -23,10 +24,7 @@ class RememberFragment : BaseFragment(R.layout.fragment_remember) {
         initListeners()
         callbacks()
 
-        val s =
-            "История с выходным 31 декабря закрутилась еще в конце октября. Тогда появилась петиция о том, чтобы сделать выходными не только 1 и 2 января, но также 31 декабря, и не отрабатывать эти дни в субботы. Петицию подписали более 15 тысяч человек. В начале ноября премьер-министр Сергей Румас пообещал рассмотреть это предложение, а 6 декабря рассказал, к какому решению пришли чиновники. Вот и все"
-        viewModel.makeSpannableString(s)
-        tvRemember.text = s
+        Toast.makeText(context, getString(R.string.select_doc), Toast.LENGTH_LONG).show()
     }
 
     private fun initListeners() {
@@ -41,7 +39,9 @@ class RememberFragment : BaseFragment(R.layout.fragment_remember) {
             if (motionEvent.action == MotionEvent.ACTION_DOWN
                 && viewModel.isWordSuggestionEnable()
             ) {
-                clickableSpan(tvRemember, motionEvent)
+                if (!tvRemember.text.isEmpty()) {
+                    clickableSpan(tvRemember, motionEvent)
+                }
             }
             false
         }

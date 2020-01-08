@@ -61,7 +61,10 @@ fun getSpannableString(allText: String, isShowAll: Boolean, callback: (Spannable
             indexes[iteratorWords] + if (iteratorWords == 0) 1 else 2,
             indexes[iteratorWords + 1]
         )
-        if (p.first > p.second) continue
+        if (p.first > p.second) {
+            iteratorWords++
+            continue
+        }
         if (isShowAll) {
             ss.clearSpans()
         } else {

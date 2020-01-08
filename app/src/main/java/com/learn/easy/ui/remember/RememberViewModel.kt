@@ -1,17 +1,14 @@
 package com.learn.easy.ui.remember
 
 import android.app.Application
-import android.graphics.Color
 import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.BackgroundColorSpan
-import android.text.style.ForegroundColorSpan
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.learn.easy.BaseViewModel
+import com.learn.easy.R
 import com.learn.easy.utils.*
 import java.io.File
 
-class RememberViewModel(app: Application) : AndroidViewModel(app) {
+class RememberViewModel(app: Application) : BaseViewModel(app) {
 
     val chooserLiveData = MutableLiveData<SingleEvent<Boolean>>()
     val textViewModel = MutableLiveData<SpannableString>()
@@ -28,12 +25,14 @@ class RememberViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun onClickShowAllMode() {
+        if (pages.isEmpty()) return
         getSpannableString(pages[currentPage].text, true) {
             textViewModel.value = it
         }
     }
 
     fun onClickRefreshAll() {
+        if (pages.isEmpty()) return
         getSpannableString(pages[currentPage].text, false) {
             textViewModel.value = it
         }
@@ -44,12 +43,27 @@ class RememberViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun onFilesWasChoose(files: Array<out String>) {
+        clearData()
         val file = files.first()
         val text = FileChooserService.newInstance().getStringFromFile(File(file))
-        println("dfsllf;ks")
+        if (text != "") {
+            makeSpannableString(text)
+        } else {
+            toast.value = SingleEvent(app.getString(R.string.error))
+        }
+    }
+
+    private fun clearData() {
+        currentPage = 0
+        pagesIterator = 1
+        pages.clear()
     }
 
     fun onClickNextPage() {
+        if (pages.isEmpty()) {
+            toast.value = SingleEvent(app.getString(R.string.select_doc))
+            return
+        }
         if (currentPage == pages.size - 1) return
         currentPage++
         pagesIterator++
@@ -69,7 +83,7 @@ class RememberViewModel(app: Application) : AndroidViewModel(app) {
         currentPageViewModel.value = Pair(pagesIterator, pages.size)
     }
 
-    fun makeSpannableString(s: String) {
+    private fun makeSpannableString(s: String) {
         createPages(s)
         getSpannableString(pages[0].text, false) {
             textViewModel.value = it

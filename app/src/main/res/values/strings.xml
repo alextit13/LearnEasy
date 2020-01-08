@@ -75,5 +75,6 @@
     <string name="image_take_success">Take image success!</string>
     <string name="enter_text_and_description">Enter title and description</string>
     <string name="audio">Audio</string>
+    <string name="select_doc">Select document</string>
 
 </resources>
