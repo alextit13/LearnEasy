@@ -5,7 +5,7 @@ import com.developer.filepicker.model.DialogConfigs
 import com.developer.filepicker.model.DialogProperties
 import com.developer.filepicker.view.FilePickerDialog
 
-open class BaseFragment(val layout: Int): Fragment(layout) {
+open class BaseFragment(val layout: Int) : Fragment(layout) {
 
     protected fun selectFile(callback: (Array<String>) -> Unit) {
         val dialog = FilePickerDialog(activity, DialogProperties().apply {

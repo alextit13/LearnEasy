@@ -49,7 +49,7 @@ class RememberViewModel(app: Application) : BaseViewModel(app) {
         if (text != "") {
             makeSpannableString(text)
         } else {
-            toast.value = SingleEvent(app.getString(R.string.error))
+            showToast(app.getString(R.string.error))
         }
     }
 
@@ -61,7 +61,7 @@ class RememberViewModel(app: Application) : BaseViewModel(app) {
 
     fun onClickNextPage() {
         if (pages.isEmpty()) {
-            toast.value = SingleEvent(app.getString(R.string.select_doc))
+            showToast(app.getString(R.string.select_doc))
             return
         }
         if (currentPage == pages.size - 1) return

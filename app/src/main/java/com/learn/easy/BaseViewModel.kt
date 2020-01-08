@@ -1,10 +1,12 @@
 package com.learn.easy
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import com.learn.easy.utils.SingleEvent
 
-open class BaseViewModel(val app: Application): AndroidViewModel(app) {
-    val toast = MutableLiveData<SingleEvent<String>>()
+open class BaseViewModel(val app: Application) : AndroidViewModel(app) {
+
+    fun showToast(message: String) {
+        Toast.makeText(app, message, Toast.LENGTH_LONG).show()
+    }
 }

@@ -21,7 +21,6 @@ class FastReadFragment : BaseFragment(R.layout.fragment_fast_read) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.apply {
-            viewWasInit()
             wordLiveData.observe(this@FastReadFragment, Observer {
                 onTextChanged(it)
             })

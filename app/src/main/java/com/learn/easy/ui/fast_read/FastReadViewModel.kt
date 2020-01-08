@@ -1,12 +1,16 @@
 package com.learn.easy.ui.fast_read
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.learn.easy.BaseViewModel
+import com.learn.easy.R
 import com.learn.easy.utils.DocFastReader
+import com.learn.easy.utils.FileChooserService
 import com.learn.easy.utils.SingleEvent
 import kotlinx.coroutines.*
+import java.io.File
 
-class FastReadViewModel : ViewModel() {
+class FastReadViewModel(app: Application) : BaseViewModel(app) {
 
     val wordLiveData = MutableLiveData<String>() // todo implement this
     val chooserLiveData = MutableLiveData<SingleEvent<Boolean>>()
@@ -16,10 +20,7 @@ class FastReadViewModel : ViewModel() {
     private var pause = true
     private var lastPosition = 0
     private var speed: Long = 500L // 100 - 1000
-
-    fun viewWasInit() {
-        // todo this
-    }
+    private var dataText = ""
 
     fun onSpeedChanged(position: Int) {
         speedViewModel.value = position // 1000 - 40 * 10
@@ -36,8 +37,13 @@ class FastReadViewModel : ViewModel() {
     }
 
     fun onClickPlay() {
+        if (dataText == "") {
+            showToast(app.getString(R.string.select_doc))
+            return
+        }
+
         book = DocFastReader().apply {
-            words = testString().split(" ").toMutableList()
+            words = dataText.split(" ").toMutableList()
         }
 
         if (!pause) return
@@ -67,10 +73,8 @@ class FastReadViewModel : ViewModel() {
     }
 
     fun onSelectDocumentResult(doc: Array<out String>) {
-        // todo this
-    }
-
-    private fun testString(): String {
-        return "История с выходным 31 декабря закрутилась еще в конце октября. Тогда появилась петиция о том, чтобы сделать выходными не только 1 и 2 января, но также 31 декабря, и не отрабатывать эти дни в субботы. Петицию подписали более 15 тысяч человек. В начале ноября премьер-министр Сергей Румас пообещал рассмотреть это предложение, а 6 декабря рассказал, к какому решению пришли чиновники. Вот и все"
+        if (doc.isEmpty()) return
+        dataText = FileChooserService.newInstance().getStringFromFile(File(doc.first()))
+        showToast(app.getString(R.string.click_play_for_start))
     }
 }
