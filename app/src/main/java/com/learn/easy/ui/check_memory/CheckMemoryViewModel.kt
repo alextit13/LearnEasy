@@ -1,15 +1,16 @@
 package com.learn.easy.ui.check_memory
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.learn.easy.utils.SingleEvent
-import com.learn.easy.utils.addBreaks
-import com.learn.easy.utils.createPages
-import com.learn.easy.utils.pages
+import com.learn.easy.BaseViewModel
+import com.learn.easy.R
+import com.learn.easy.utils.*
 import kotlinx.coroutines.*
+import java.io.File
 import java.util.*
 
-class CheckMemoryViewModel : ViewModel() {
+class CheckMemoryViewModel(app: Application) : BaseViewModel(app) {
 
     private val minSpeed = 2_00
     private val maxSpeed = 1_000
@@ -25,9 +26,11 @@ class CheckMemoryViewModel : ViewModel() {
     val pauseLiveData = MutableLiveData<SingleEvent<Boolean>>(SingleEvent(true))
     val markLiveData = MutableLiveData<SingleEvent<Long>>()
 
-    fun viewWasInit() {
+    private var dataText = ""
+
+    private fun viewWasInit() {
         pauseLiveData.value = SingleEvent(true)
-        createPages(testString())
+        createPages(dataText)
         textLiveData.value = pages[0].text.addBreaks()
     }
 
@@ -57,7 +60,7 @@ class CheckMemoryViewModel : ViewModel() {
     private fun playBook(startPosition: Int) {
         GlobalScope.launch {
             val words = pages[indexPage].text.split(" ")
-            for (i in startPosition until words.size - 1) {
+            for (i in startPosition until words.size) {
                 withContext(Dispatchers.Main) {
                     markLiveData.value = SingleEvent(Date().time)
                 }
@@ -66,11 +69,11 @@ class CheckMemoryViewModel : ViewModel() {
                     lastPosition = i
                     break
                 }
-                if (i == 9) { // 10 - 1 words on one page
+                if (i == words.size - 1) { // 10 - 1 words on one page
                     indexPage++
                     withContext(Dispatchers.Main) {
                         textLiveData.value = pages[indexPage].text.addBreaks()
-                        playBook(indexPage)
+                        playBook(0)
                     }
                 }
             }
@@ -82,10 +85,11 @@ class CheckMemoryViewModel : ViewModel() {
     }
 
     fun onSelectDocumentResult(doc: Array<out String>) {
-        // todo this
-    }
-
-    private fun testString(): String {
-        return "История с выходным 31 декабря закрутилась еще в конце октября. Тогда появилась петиция о том"
+        if (doc.isEmpty()) {
+            showToast(app.getString(R.string.select_doc))
+            return
+        }
+        dataText = FileChooserService.newInstance().getStringFromFile(File(doc.first()))
+        viewWasInit()
     }
 }

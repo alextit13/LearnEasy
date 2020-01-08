@@ -49,7 +49,6 @@ class CheckMemoryFragment : BaseFragment(R.layout.fragment_check_memory) {
                     setMarkWord()
                 }
             })
-            viewWasInit()
         }
         initClickers()
     }
