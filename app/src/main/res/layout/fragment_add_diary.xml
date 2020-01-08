@@ -8,6 +8,8 @@
 
     <EditText
         android:id="@+id/etTitle"
+        style="@style/CustomEditText"
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/title" />
@@ -25,6 +27,8 @@
 
     <Button
         android:id="@+id/btnSave"
+        style="@style/CustomButton"
+        android:layout_margin="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
-    android:gravity="bottom|start"
+    android:background="@drawable/back_gradient"
     android:orientation="vertical">
 
     <TextView
+        android:layout_gravity="start|bottom"
         android:textSize="32sp"
+        android:layout_margin="8dp"
+        android:textColor="@color/colorPrimaryDark"
         android:text="@string/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-</LinearLayout>
+</FrameLayout>

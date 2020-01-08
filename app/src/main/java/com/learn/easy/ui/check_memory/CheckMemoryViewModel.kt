@@ -39,6 +39,12 @@ class CheckMemoryViewModel(app: Application) : BaseViewModel(app) {
     }
 
     fun onClickStop() {
+
+        if (dataText == "") {
+            showToast(app.getString(R.string.select_doc))
+            return
+        }
+
         pause = true
         lastPosition = 0
         indexPage = 0
@@ -47,10 +53,19 @@ class CheckMemoryViewModel(app: Application) : BaseViewModel(app) {
 
     fun onClickPause() {
         pause = true
+        if (dataText == "") {
+            showToast(app.getString(R.string.select_doc))
+            return
+        }
     }
 
     fun onClickPlay() {
         if (!pause) return
+
+        if (dataText == "") {
+            showToast(app.getString(R.string.select_doc))
+            return
+        }
 
         pause = false
 

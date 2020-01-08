@@ -9,6 +9,7 @@
     <EditText
         android:id="@+id/etTitleVideoNotes"
         android:layout_margin="@dimen/margin_default"
+        style="@style/CustomEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/title" />
@@ -45,6 +46,7 @@
 
     <Button
         android:id="@+id/btnCancel"
+        style="@style/CustomButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -54,6 +56,8 @@
 
     <Button
         android:id="@+id/btnSave"
+        android:layout_marginStart="8dp"
+        style="@style/CustomButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

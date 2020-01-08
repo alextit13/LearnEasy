@@ -33,6 +33,7 @@
                 <EditText
                     android:id="@+id/etTitle"
                     android:layout_margin="@dimen/margin_default"
+                    style="@style/CustomEditText"
                     android:hint="@string/title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -41,6 +42,7 @@
                     android:id="@+id/etDescription"
                     android:layout_margin="@dimen/margin_default"
                     android:hint="@string/description"
+                    style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -92,6 +94,7 @@
             <Button
                 android:id="@+id/btnCancel"
                 android:padding="@dimen/margin_default"
+                style="@style/CustomButton"
                 android:text="@string/cancel"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/margin_default"
@@ -102,6 +105,7 @@
                 android:id="@+id/btnSave"
                 android:padding="@dimen/margin_default"
                 android:text="@string/save"
+                style="@style/CustomButton"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/margin_default"
                 android:layout_width="wrap_content"

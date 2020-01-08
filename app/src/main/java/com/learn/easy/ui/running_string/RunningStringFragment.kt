@@ -60,7 +60,8 @@ class RunningStringFragment : BaseFragment(R.layout.fragment_running_string) {
                     tvCheckMemory.pauseScroll()
                     viewModel.onSpeedChanged(position)
                     tvCheckMemory.resumeScroll()
-                    tvTitleSpeedRunningString.text = "${activity?.getString(R.string.speed)} $position"
+                    tvTitleSpeedRunningString.text =
+                        "${activity?.getString(R.string.speed)} $position"
                 }
             }
 

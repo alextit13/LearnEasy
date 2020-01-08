@@ -2,7 +2,6 @@ package com.learn.easy.ui.running_string
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.learn.easy.BaseViewModel
 import com.learn.easy.R
 import com.learn.easy.utils.DocFastReader
