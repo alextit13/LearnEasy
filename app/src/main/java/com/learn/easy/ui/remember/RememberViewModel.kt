@@ -9,6 +9,7 @@ import android.text.style.ForegroundColorSpan
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.learn.easy.utils.*
+import java.io.File
 
 class RememberViewModel(app: Application) : AndroidViewModel(app) {
 
@@ -43,7 +44,9 @@ class RememberViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun onFilesWasChoose(files: Array<out String>) {
-        // todo this
+        val file = files.first()
+        val text = FileChooserService.newInstance().getStringFromFile(File(file))
+        println("dfsllf;ks")
     }
 
     fun onClickNextPage() {

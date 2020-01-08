@@ -10,10 +10,14 @@ android {
     defaultConfig {
         applicationId "com.learn.easy"
         minSdkVersion 21
+        multiDexEnabled true
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    dexOptions {
+        preDexLibraries = false
     }
     buildTypes {
         release {
@@ -29,10 +33,28 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/spring.handlers'
+        exclude 'META-INF/spring.schemas'
+        exclude 'META-INF/LICENSE.md'
+        exclude 'META-INF/INDEX.LIST'
+        exclude 'META-INF/jing-copying.html'
+        exclude 'META-INF/blueprint.handlers'
+        exclude("META-INF/*.kotlin_module")
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:multidex:1.0.3'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.1.0'
@@ -56,4 +78,11 @@ dependencies {
 
     // text spans
     implementation 'com.github.bachors:Android-WordToSpan:3.1'
+
+    // word docs
+    implementation 'org.apache.poi:poi:3.9'
+    implementation 'org.apache.poi:poi-ooxml:3.9'
+
+    // pdf
+    implementation 'com.itextpdf:itextg:5.5.10'
 }
