@@ -29,12 +29,8 @@ class RunningStringViewModel(app: Application) : BaseViewModel(app) {
     }
 
     fun onSpeedChanged(position: Int) {
-        val a = maxSpeed - ((maxSpeed - minSpeed) / 100) * position
+        val a = /*maxSpeed - ((maxSpeed - minSpeed) / 100) * position*/ 100 - position
         speedLiveData.value = a
-    }
-
-    fun onClickStop() {
-        // todo this
     }
 
     fun onClickPause() {
@@ -62,6 +58,7 @@ class RunningStringViewModel(app: Application) : BaseViewModel(app) {
         book = DocFastReader().apply {
             text = dataString
         }
+        speedLiveData.value = 50
         textLiveData.value = book?.text ?: ""
     }
 }

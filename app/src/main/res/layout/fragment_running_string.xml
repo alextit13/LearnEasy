@@ -90,6 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:padding="16dp"
+        android:visibility="gone"
         android:background="?attr/selectableItemBackground"
         android:src="@drawable/icon_stop"
         app:layout_constraintEnd_toEndOf="parent"

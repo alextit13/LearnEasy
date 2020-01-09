@@ -19,10 +19,10 @@ class RunningStringFragment : BaseFragment(R.layout.fragment_running_string) {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        tvCheckMemory.dur = 50
         viewModel.apply {
-            chooserLiveData.observe(this@RunningStringFragment, Observer {
-                if (it.getContentIfNotHandled() != null) {
+            chooserLiveData.observe(this@RunningStringFragment, Observer { se ->
+                if (se.getContentIfNotHandled() != null) {
                     selectFile {
                         viewModel.onSelectDocumentResult(it)
                     }
@@ -30,7 +30,8 @@ class RunningStringFragment : BaseFragment(R.layout.fragment_running_string) {
             })
             speedLiveData.observe(this@RunningStringFragment, Observer {
                 tvCheckMemory.apply {
-                    rndDuration = it
+                    dur = it
+                    resumeScroll()
                 }
             })
             textLiveData.observe(this@RunningStringFragment, Observer {
@@ -59,7 +60,6 @@ class RunningStringFragment : BaseFragment(R.layout.fragment_running_string) {
                 if (isUser) {
                     tvCheckMemory.pauseScroll()
                     viewModel.onSpeedChanged(position)
-                    tvCheckMemory.resumeScroll()
                     tvTitleSpeedRunningString.text =
                         "${activity?.getString(R.string.speed)} $position"
                 }
@@ -73,7 +73,6 @@ class RunningStringFragment : BaseFragment(R.layout.fragment_running_string) {
 
             }
         })
-        ivStopCheckMemory.setOnClickListener { viewModel.onClickStop() }
         ivPauseCheckMemory.setOnClickListener { viewModel.onClickPause() }
         ivPlayCheckMemory.setOnClickListener { viewModel.onClickPlay() }
         fabCheckMemory.setOnClickListener { viewModel.onClickOpenFile() }

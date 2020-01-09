@@ -2,7 +2,6 @@ package com.learn.easy.ui.check_memory
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.learn.easy.BaseViewModel
 import com.learn.easy.R
 import com.learn.easy.utils.*
@@ -23,13 +22,11 @@ class CheckMemoryViewModel(app: Application) : BaseViewModel(app) {
 
     val chooserLiveData = MutableLiveData<SingleEvent<Boolean>>()
     val textLiveData = MutableLiveData<String>()
-    val pauseLiveData = MutableLiveData<SingleEvent<Boolean>>(SingleEvent(true))
     val markLiveData = MutableLiveData<SingleEvent<Long>>()
 
     private var dataText = ""
 
     private fun viewWasInit() {
-        pauseLiveData.value = SingleEvent(true)
         createPages(dataText)
         textLiveData.value = pages[0].text.addBreaks()
     }

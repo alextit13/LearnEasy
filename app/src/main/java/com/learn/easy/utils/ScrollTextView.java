@@ -16,7 +16,7 @@ public class ScrollTextView extends TextView {
     private Scroller mSlr;
 
     // milliseconds for a round of scrolling
-    private int mRndDuration = 50_000; // 15_000 - 60_000
+    private int mRndDuration = 10_000; // 15_000 - 60_000
 
     /*         22_500
     * 15_000     x       60_000
@@ -24,6 +24,7 @@ public class ScrollTextView extends TextView {
     *   1       50       100
     * */
 
+    private int dur = 50;
 
     // the X offset when paused
     private int mXPaused = 0;
@@ -92,11 +93,11 @@ public class ScrollTextView extends TextView {
 
         int scrollingLen = calculateScrollingLen();
         int distance = scrollingLen - (getWidth() + mXPaused);
-        int duration = (new Double(mRndDuration * distance * 1.00000
-                / scrollingLen)).intValue();
+        /*int duration = (new Double(mRndDuration * distance * 1.00000
+                / scrollingLen)).intValue();*/
 
         setVisibility(VISIBLE);
-        mSlr.startScroll(mXPaused, 0, distance, 0, duration);
+        mSlr.startScroll(mXPaused, 0, distance, 0, dur * getText().length());
         invalidate();
         mPaused = false;
     }
@@ -160,5 +161,13 @@ public class ScrollTextView extends TextView {
 
     public boolean isPaused() {
         return mPaused;
+    }
+
+    public int getDur() {
+        return dur;
+    }
+
+    public void setDur(int dur) {
+        this.dur = dur;
     }
 }

@@ -28,8 +28,8 @@ class CheckMemoryFragment : BaseFragment(R.layout.fragment_check_memory) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.apply {
-            chooserLiveData.observe(this@CheckMemoryFragment, Observer {
-                if (it.getContentIfNotHandled() != null) {
+            chooserLiveData.observe(this@CheckMemoryFragment, Observer { se ->
+                if (se.getContentIfNotHandled() != null) {
                     selectFile {
                         viewModel.onSelectDocumentResult(it)
                     }
@@ -40,9 +40,6 @@ class CheckMemoryFragment : BaseFragment(R.layout.fragment_check_memory) {
                 tvCheckMemory.apply {
                     text = it
                 }
-            })
-            pauseLiveData.observe(this@CheckMemoryFragment, Observer {
-                // todo this
             })
             markLiveData.observe(this@CheckMemoryFragment, Observer {
                 if (it.getContentIfNotHandled() != null) {

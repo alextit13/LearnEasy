@@ -12,7 +12,7 @@ import java.io.File
 
 class FastReadViewModel(app: Application) : BaseViewModel(app) {
 
-    val wordLiveData = MutableLiveData<String>() // todo implement this
+    val wordLiveData = MutableLiveData<String>()
     val chooserLiveData = MutableLiveData<SingleEvent<Boolean>>()
     val speedViewModel = MutableLiveData(50)
 
