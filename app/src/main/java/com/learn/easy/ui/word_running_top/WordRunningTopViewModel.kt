@@ -23,6 +23,10 @@ class WordRunningTopViewModel(app: Application) : BaseViewModel(app) {
             showToast(app.getString(R.string.select_doc))
             return
         }
-        dataText.value = FileChooserService.newInstance().getStringFromFile(File(doc.first()))
+        onTextChoose(FileChooserService.newInstance().getStringFromFile(File(doc.first())))
+    }
+
+    fun onTextChoose(text: String){
+        dataText.value = text
     }
 }

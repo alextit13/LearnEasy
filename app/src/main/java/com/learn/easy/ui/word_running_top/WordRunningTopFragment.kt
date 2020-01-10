@@ -6,10 +6,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.learn.easy.R
 import com.learn.easy.ui.BaseFragment
+import com.learn.easy.ui.BaseSelectFragment
 import kotlinx.android.synthetic.main.fragment_word_running_top.*
 import kotlinx.coroutines.*
 
-class WordRunningTopFragment : BaseFragment(R.layout.fragment_word_running_top) {
+class WordRunningTopFragment : BaseSelectFragment(R.layout.fragment_word_running_top) {
 
     private val viewModel: WordRunningTopViewModel by lazy {
         ViewModelProviders.of(this).get(WordRunningTopViewModel::class.java)
@@ -24,7 +25,7 @@ class WordRunningTopFragment : BaseFragment(R.layout.fragment_word_running_top) 
     }
 
     private fun initListeners() {
-        fabOpenStringRunningTop.setOnClickListener { viewModel.onClickOpenFile() }
+        fabOpenStringRunningTop.setOnClickListener { showChooseDialog() }
 
 
         viewModel.chooserLiveData.observe(this, Observer {
@@ -58,5 +59,17 @@ class WordRunningTopFragment : BaseFragment(R.layout.fragment_word_running_top) 
                 scrollPosition++
             }
         }
+    }
+
+    override fun onClickEnter() {
+        showEnterTextDialog()
+    }
+
+    override fun onClickSelect() {
+        viewModel.onClickOpenFile()
+    }
+
+    override fun onEnterTextResult(text: String) {
+        viewModel.onTextChoose(text)
     }
 }
