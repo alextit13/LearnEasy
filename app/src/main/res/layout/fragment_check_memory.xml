@@ -87,37 +87,37 @@
         android:id="@+id/ivStopCheckMemory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:padding="16dp"
+        android:layout_marginBottom="8dp"
         android:background="?attr/selectableItemBackground"
+        android:padding="16dp"
         android:src="@drawable/icon_stop"
+        app:layout_constraintBottom_toTopOf="@+id/ivPauseCheckMemory"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvCheckMemory" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/ivPauseCheckMemory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:layout_marginBottom="8dp"
         android:background="?attr/selectableItemBackground"
-        android:layout_marginTop="16dp"
+        android:padding="16dp"
         android:src="@drawable/icon_pause"
+        app:layout_constraintBottom_toTopOf="@+id/ivPlayCheckMemory"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivStopCheckMemory" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/ivPlayCheckMemory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:background="?attr/selectableItemBackground"
         android:padding="16dp"
         android:src="@drawable/icon_play"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivPauseCheckMemory" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabCheckMemory"

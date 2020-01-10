@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin_default"
+    android:layout_margin="@dimen/margin_default">
+
+    <Button
+        android:id="@+id/btnSelect"
+        style="@style/CustomButton"
+        android:text="@string/select_doc"
+        android:drawableEnd="@drawable/icon_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnEnter"
+        style="@style/CustomButton"
+        android:layout_marginTop="@dimen/margin_default"
+        android:text="@string/lbl_enter_text"
+        android:drawableEnd="@drawable/icon_write_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

@@ -84,8 +84,10 @@ class CheckMemoryViewModel(app: Application) : BaseViewModel(app) {
                 if (i == words.size - 1) { // 10 - 1 words on one page
                     indexPage++
                     withContext(Dispatchers.Main) {
-                        textLiveData.value = pages[indexPage].text.addBreaks()
-                        playBook(0)
+                        if (indexPage <= pages.size - 1) {
+                            textLiveData.value = pages[indexPage].text.addBreaks()
+                            playBook(0)
+                        }
                     }
                 }
             }
@@ -102,6 +104,11 @@ class CheckMemoryViewModel(app: Application) : BaseViewModel(app) {
             return
         }
         dataText = FileChooserService.newInstance().getStringFromFile(File(doc.first()))
+        viewWasInit()
+    }
+
+    fun onTextEnter(text: String) {
+        dataText = text
         viewWasInit()
     }
 }

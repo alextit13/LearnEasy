@@ -8,11 +8,11 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.learn.easy.R
-import com.learn.easy.ui.BaseFragment
+import com.learn.easy.ui.BaseSelectFragment
 import com.learn.easy.utils.clickableSpan
 import kotlinx.android.synthetic.main.fragment_remember.*
 
-class RememberFragment : BaseFragment(R.layout.fragment_remember) {
+class RememberFragment : BaseSelectFragment(R.layout.fragment_remember) {
 
     private val viewModel: RememberViewModel by lazy {
         ViewModelProviders.of(this).get(RememberViewModel::class.java)
@@ -31,7 +31,9 @@ class RememberFragment : BaseFragment(R.layout.fragment_remember) {
         ibShowWordMode.setOnClickListener { viewModel.onClickShowWordMode() }
         ibShowAllMode.setOnClickListener { viewModel.onClickShowAllMode() }
         ibRefreshAll.setOnClickListener { viewModel.onClickRefreshAll() }
-        fabSelectDoc.setOnClickListener { viewModel.onClickSelectDoc() }
+        fabSelectDoc.setOnClickListener {
+            showChooseDialog()
+        }
         ivPreviousPage.setOnClickListener { viewModel.onClickPreviousPage() }
         ivNextPage.setOnClickListener { viewModel.onClickNextPage() }
 
@@ -75,5 +77,17 @@ class RememberFragment : BaseFragment(R.layout.fragment_remember) {
                 )
             })
         }
+    }
+
+    override fun onClickEnter() {
+        showEnterTextDialog()
+    }
+
+    override fun onClickSelect() {
+        viewModel.onClickSelectDoc()
+    }
+
+    override fun onEnterTextResult(text: String) {
+        viewModel.onTextSelected(text)
     }
 }

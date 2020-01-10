@@ -77,5 +77,6 @@
     <string name="audio">Audio</string>
     <string name="select_doc">Dokumentauswahl</string>
     <string name="click_play_for_start">Klicken Sie auf Start, um loszulegen!</string>
+    <string name="lbl_enter_text">Text eingeben</string>
 
 </resources>

@@ -46,6 +46,10 @@ class RememberViewModel(app: Application) : BaseViewModel(app) {
         clearData()
         val file = files.first()
         val text = FileChooserService.newInstance().getStringFromFile(File(file))
+        onTextSelected(text)
+    }
+
+    fun onTextSelected(text: String){
         if (text != "") {
             makeSpannableString(text)
         } else {

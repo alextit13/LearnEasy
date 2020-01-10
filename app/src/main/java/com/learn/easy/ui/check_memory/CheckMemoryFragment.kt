@@ -12,12 +12,12 @@ import androidx.core.text.clearSpans
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.learn.easy.R
-import com.learn.easy.ui.BaseFragment
+import com.learn.easy.ui.BaseSelectFragment
 import com.learn.easy.utils.getInterval
 import com.learn.easy.utils.lastBreakIndex
 import kotlinx.android.synthetic.main.fragment_check_memory.*
 
-class CheckMemoryFragment : BaseFragment(R.layout.fragment_check_memory) {
+class CheckMemoryFragment : BaseSelectFragment(R.layout.fragment_check_memory) {
 
     private val viewModel: CheckMemoryViewModel by lazy {
         ViewModelProviders.of(this).get(CheckMemoryViewModel::class.java)
@@ -84,6 +84,18 @@ class CheckMemoryFragment : BaseFragment(R.layout.fragment_check_memory) {
         ivStopCheckMemory.setOnClickListener { viewModel.onClickStop() }
         ivPauseCheckMemory.setOnClickListener { viewModel.onClickPause() }
         ivPlayCheckMemory.setOnClickListener { viewModel.onClickPlay() }
-        fabCheckMemory.setOnClickListener { viewModel.onClickOpenFile() }
+        fabCheckMemory.setOnClickListener { showChooseDialog() }
+    }
+
+    override fun onClickEnter() {
+        showEnterTextDialog()
+    }
+
+    override fun onClickSelect() {
+        viewModel.onClickOpenFile()
+    }
+
+    override fun onEnterTextResult(text: String) {
+        viewModel.onTextEnter(text)
     }
 }
