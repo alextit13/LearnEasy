@@ -8,9 +8,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.learn.easy.R
 import com.learn.easy.ui.BaseFragment
+import com.learn.easy.ui.BaseSelectFragment
 import kotlinx.android.synthetic.main.fragment_running_string.*
 
-class RunningStringFragment : BaseFragment(R.layout.fragment_running_string) {
+class RunningStringFragment : BaseSelectFragment(R.layout.fragment_running_string) {
 
     private val viewModel: RunningStringViewModel by lazy {
         ViewModelProviders.of(this).get(RunningStringViewModel::class.java)
@@ -75,6 +76,18 @@ class RunningStringFragment : BaseFragment(R.layout.fragment_running_string) {
         })
         ivPauseCheckMemory.setOnClickListener { viewModel.onClickPause() }
         ivPlayCheckMemory.setOnClickListener { viewModel.onClickPlay() }
-        fabCheckMemory.setOnClickListener { viewModel.onClickOpenFile() }
+        fabCheckMemory.setOnClickListener { showChooseDialog() }
+    }
+
+    override fun onClickEnter() {
+        showEnterTextDialog()
+    }
+
+    override fun onClickSelect() {
+        viewModel.onClickOpenFile()
+    }
+
+    override fun onEnterTextResult(text: String) {
+        viewModel.onTextChoose(text)
     }
 }

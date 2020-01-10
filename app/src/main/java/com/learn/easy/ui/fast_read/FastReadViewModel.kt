@@ -74,7 +74,11 @@ class FastReadViewModel(app: Application) : BaseViewModel(app) {
 
     fun onSelectDocumentResult(doc: Array<out String>) {
         if (doc.isEmpty()) return
-        dataText = FileChooserService.newInstance().getStringFromFile(File(doc.first()))
+        onTextChoose(FileChooserService.newInstance().getStringFromFile(File(doc.first())))
+    }
+
+    fun onTextChoose(text: String){
+        dataText = text
         showToast(app.getString(R.string.click_play_for_start))
     }
 }

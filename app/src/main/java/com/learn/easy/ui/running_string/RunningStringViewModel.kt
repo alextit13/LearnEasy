@@ -54,7 +54,12 @@ class RunningStringViewModel(app: Application) : BaseViewModel(app) {
             showToast(app.getString(R.string.select_doc))
             return
         }
-        dataString = FileChooserService.newInstance().getStringFromFile(File(doc.first()))
+
+        onTextChoose(FileChooserService.newInstance().getStringFromFile(File(doc.first())))
+    }
+
+    fun onTextChoose(textEnter: String) {
+        dataString = textEnter
         book = DocFastReader().apply {
             text = dataString
         }

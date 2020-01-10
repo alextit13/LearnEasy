@@ -7,10 +7,10 @@ import android.widget.SeekBar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.learn.easy.R
-import com.learn.easy.ui.BaseFragment
+import com.learn.easy.ui.BaseSelectFragment
 import kotlinx.android.synthetic.main.fragment_fast_read.*
 
-class FastReadFragment : BaseFragment(R.layout.fragment_fast_read) {
+class FastReadFragment : BaseSelectFragment(R.layout.fragment_fast_read) {
 
     private val viewModel: FastReadViewModel by lazy {
         ViewModelProviders.of(this).get(FastReadViewModel::class.java)
@@ -59,10 +59,22 @@ class FastReadFragment : BaseFragment(R.layout.fragment_fast_read) {
         ivStopFastReader.setOnClickListener { viewModel.onClickStop() }
         ivPauseFastReader.setOnClickListener { viewModel.onClickPause() }
         ivPlayFastReader.setOnClickListener { viewModel.onClickPlay() }
-        fabFastReader.setOnClickListener { viewModel.onClickOpenFile() }
+        fabFastReader.setOnClickListener { showChooseDialog() }
     }
 
     private fun onTextChanged(word: String) {
         tvFastReader.text = word
+    }
+
+    override fun onClickEnter() {
+        showEnterTextDialog()
+    }
+
+    override fun onClickSelect() {
+        viewModel.onClickOpenFile()
+    }
+
+    override fun onEnterTextResult(text: String) {
+        viewModel.onTextChoose(text)
     }
 }
