@@ -67,7 +67,7 @@
         android:padding="@dimen/padding_default"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="44sp"
+        android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
