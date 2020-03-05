@@ -85,4 +85,7 @@ dependencies {
 
     // pdf
     implementation 'com.itextpdf:itextg:5.5.10'
+
+    // admob
+    implementation 'com.google.android.gms:play-services-ads:19.0.0'
 }

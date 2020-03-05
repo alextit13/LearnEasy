@@ -10,17 +10,22 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_base_host.*
 import kotlinx.android.synthetic.main.app_bar_base_host.*
+import com.google.android.gms.ads.MobileAds
+import kotlinx.android.synthetic.main.content_base_host.*
 
-class BaseHostActivity : AppCompatActivity() {
+class BaseHostActivity : AppCompatActivity(R.layout.activity_base_host) {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_base_host)
         setSupportActionBar(toolbar)
+
+        MobileAds.initialize(this)
+        adView.loadAd(AdRequest.Builder().build())
 
         val navController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(
